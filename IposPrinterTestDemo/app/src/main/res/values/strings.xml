@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">PrinterTestDemo</string>
+    <string name="app_name">POS</string>
     <string name="print_display">Display Mode</string>
     <string name="print_text">Print Text</string>
     <string name="print_english">Print English</string>
@@ -38,9 +38,12 @@
     <string name="unknown_error">unknown status</string>
     <string name="switch_mode">Switch Mode</string>
     <string name="exit">Exit</string>
-    <string name="login" tools:ignore="DuplicateDefinition" translatable="false">Sign In</string>
-    <string name="buy" tools:ignore="DuplicateDefinition" translatable="false">Buy</string>
-    <string name="send" tools:ignore="DuplicateDefinition" translatable="false">Send</string>
-    <string name="receive" tools:ignore="DuplicateDefinition" translatable="false">Receive</string>
-    <string name="print" tools:ignore="DuplicateDefinition" translatable="false">Test Print</string>
+    <string name="login" translatable="false" tools:ignore="DuplicateDefinition">Sign In</string>
+    <string name="register" translatable="false" tools:ignore="DuplicateDefinition">Sign Up</string>
+    <string name="buy" translatable="false" tools:ignore="DuplicateDefinition">Buy</string>
+    <string name="send" translatable="false" tools:ignore="DuplicateDefinition">Send</string>
+    <string name="receive" translatable="false" tools:ignore="DuplicateDefinition">Receive</string>
+    <string name="print" translatable="false" tools:ignore="DuplicateDefinition">Test Print</string>
+    <string name="email" translatable="false" tools:ignore="DuplicateDefinition">Email</string>
+    <string name="passwd" translatable="false" tools:ignore="DuplicateDefinition">Password</string>
 </resources>
