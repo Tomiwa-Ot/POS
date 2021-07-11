@@ -43,7 +43,11 @@
     <string name="buy" translatable="false" tools:ignore="DuplicateDefinition">Buy</string>
     <string name="send" translatable="false" tools:ignore="DuplicateDefinition">Send</string>
     <string name="receive" translatable="false" tools:ignore="DuplicateDefinition">Receive</string>
+    <string name="history" translatable="false" tools:ignore="DuplicateDefinition">History</string>
+    <string name="settings" translatable="false" tools:ignore="DuplicateDefinition">Settings</string>
     <string name="print" translatable="false" tools:ignore="DuplicateDefinition">Test Print</string>
     <string name="email" translatable="false" tools:ignore="DuplicateDefinition">Email</string>
     <string name="passwd" translatable="false" tools:ignore="DuplicateDefinition">Password</string>
+    <string name="fname" translatable="false" tools:ignore="DuplicateDefinition">Firstname</string>
+    <string name="lname" translatable="false" tools:ignore="DuplicateDefinition">Lastname</string>
 </resources>

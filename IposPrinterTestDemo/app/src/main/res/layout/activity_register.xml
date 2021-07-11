@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/purple"
+    android:gravity="center"
+    tools:context=".RegisterActivity">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        app:cardCornerRadius="10dp"
+        android:background="@color/white"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:id="@+id/name_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edt_firstname"
+                android:layout_width="170dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/fname"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingLeft="40dp"
+                android:paddingEnd="25dp"
+                android:paddingRight="40dp"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/edt_lastname"
+                android:layout_width="170dp"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/lname"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:paddingStart="15dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:singleLine="true" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:hint="@string/email"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_text_border"/>
+
+            <EditText
+                android:id="@+id/edt_passwd"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:hint="@string/passwd"
+                android:paddingStart="15dp"
+                android:paddingEnd="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_border"/>
+
+            <Button
+                android:id="@+id/regsiter_btn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/purple"
+                android:onClick="register"
+                android:text="@string/register"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
