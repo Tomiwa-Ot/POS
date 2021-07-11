@@ -88,6 +88,7 @@ public class BuyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Buy");
         setContentView(R.layout.activity_buy);
         handler = new HandlerUtils.MyHandler(iHandlerIntent);
         callback = new IPosPrinterCallback.Stub() {
