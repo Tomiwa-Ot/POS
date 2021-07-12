@@ -1,6 +1,8 @@
 package com.iposprinter.printertestdemo;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -13,6 +15,7 @@ import java.util.regex.Pattern;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email, passwd;
+    SharedPreferences loginState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(View view){
+        loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = loginState.edit();
+        editor.putBoolean("isLoggedIn", true);
+        editor.commit();
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }

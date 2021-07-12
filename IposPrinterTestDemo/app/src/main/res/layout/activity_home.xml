@@ -1,61 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bck"
     tools:context=".HomeActivity">
 
+    <android.support.v7.widget.CardView
+        android:id="@+id/credit_card"
+        android:layout_width="400dp"
+        android:layout_height="150dp"
+        android:layout_margin="50dp"
+        android:padding="5dp"
+        app:cardCornerRadius="10dp"
+        android:background="@color/white"
+        app:cardElevation="15dp">
 
-    <ScrollView
+    </android.support.v7.widget.CardView>
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_below="@+id/credit_card">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:layout_height="match_parent" >
 
-            <Button
-                android:id="@+id/buy_btn"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="buy"
-                android:text="@string/buy" />
+                android:orientation="vertical"
+                android:paddingTop="1dp">
 
-            <Button
-                android:id="@+id/send_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="send"
-                android:text="@string/send" />
+                <Button
+                    android:id="@+id/buy_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="buy"
+                    android:text="@string/buy" />
 
-            <Button
-                android:id="@+id/receive_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="receive"
-                android:text="@string/receive" />
+                <Button
+                    android:id="@+id/send_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="send"
+                    android:text="@string/send" />
 
-            <Button
-                android:id="@+id/history_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="history"
-                android:text="@string/history" />
+                <Button
+                    android:id="@+id/receive_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="receive"
+                    android:text="@string/receive" />
 
-            <Button
-                android:id="@+id/printer_test_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="testPrint"
-                android:text="@string/print" />
+                <Button
+                    android:id="@+id/history_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="history"
+                    android:text="@string/history" />
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/logout_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="logout"
+                    android:text="@string/logout" />
 
-    </ScrollView>
-</LinearLayout>
+                <Button
+                    android:id="@+id/printer_test_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="testPrint"
+                    android:text="@string/print" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+</RelativeLayout>
 
