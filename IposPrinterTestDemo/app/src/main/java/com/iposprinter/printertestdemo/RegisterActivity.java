@@ -18,6 +18,7 @@ public class RegisterActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
+        setTitle("Receive");
         firstname = (EditText) findViewById(R.id.edt_firstname);
         lastname = (EditText) findViewById(R.id.edt_lastname);
         email = (EditText) findViewById(R.id.edt_email);

@@ -7,18 +7,84 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/bck"
+    android:background="@color/gainsboro"
     tools:context=".HomeActivity">
+
+<!--    <android.support.design.widget.AppBarLayout-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="@color/gainsboro"-->
+<!--        android:elevation="0dp">-->
+
+
+<!--    </android.support.design.widget.AppBarLayout>-->
 
     <android.support.v7.widget.CardView
         android:id="@+id/credit_card"
         android:layout_width="400dp"
         android:layout_height="150dp"
-        android:layout_margin="50dp"
-        android:padding="5dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
         app:cardCornerRadius="10dp"
-        android:background="@color/white"
+        android:onClick="copy"
+        app:cardBackgroundColor="@color/purple"
         app:cardElevation="15dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="60dp"
+                android:text="0.000 BTC"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:layout_marginRight="40dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="10dp"
+                android:text="1zxxzxzxzxzxzxzxzxzxzxzxzxzxzxcd"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="120dp"
+                android:layout_marginBottom="10dp"
+                android:text="Olaide Bishop"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 
@@ -26,7 +92,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/credit_card">
+        android:background="@drawable/rounded_container"
+        android:layout_below="@+id/credit_card"
+        android:paddingLeft="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:paddingRight="20dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -65,6 +137,13 @@
                     android:layout_height="wrap_content"
                     android:onClick="history"
                     android:text="@string/history" />
+
+                <Button
+                    android:id="@+id/qr_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="qrCode"
+                    android:text="@string/qrcode" />
 
                 <Button
                     android:id="@+id/logout_btn"

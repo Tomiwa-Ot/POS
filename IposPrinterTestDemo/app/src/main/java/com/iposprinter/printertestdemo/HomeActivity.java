@@ -1,5 +1,7 @@
 package com.iposprinter.printertestdemo;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -21,8 +24,21 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
     }
 
+    public void copy(){
+//        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+//        ClipData clip = ClipData.newPlainText("Someinfo", "Someinfo");
+//        clipboard.setPrimaryClip(clip);
+        Toast.makeText(getApplicationContext(),"Wallet Address Copied",Toast.LENGTH_SHORT).show();
+    }
+
     public void buy(View view){
         Intent intent = new Intent(this, BuyActivity.class);
+        startActivity(intent);
+    }
+
+    public void qrCode(View view){
+        Intent intent = new Intent(this, QrCodeActivity.class);
+        intent.putExtra("address", "this is the wallet address");
         startActivity(intent);
     }
 

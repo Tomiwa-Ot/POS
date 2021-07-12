@@ -21,45 +21,53 @@
         android:background="@color/white"
         app:cardElevation="5dp">
 
-        <LinearLayout
-            android:id="@+id/name_layout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_marginTop="120dp">
 
-            <EditText
-                android:id="@+id/edt_firstname"
-                android:layout_width="170dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/edit_text_border"
-                android:hint="@string/fname"
-                android:inputType="textPersonName"
-                android:maxLines="1"
-                android:paddingStart="15dp"
-                android:paddingLeft="40dp"
-                android:paddingEnd="25dp"
-                android:paddingRight="40dp"
-                android:singleLine="true" />
+            <LinearLayout
+                android:id="@+id/name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edt_lastname"
-                android:layout_width="170dp"
-                android:layout_height="45dp"
-                android:layout_margin="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/edit_text_border"
-                android:hint="@string/lname"
-                android:inputType="textPersonName"
-                android:maxLines="1"
-                android:paddingStart="15dp"
-                android:paddingLeft="40dp"
-                android:paddingRight="40dp"
-                android:singleLine="true" />
+                <EditText
+                    android:id="@+id/edt_firstname"
+                    android:layout_width="170dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="@string/fname"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:paddingStart="15dp"
+                    android:paddingLeft="40dp"
+                    android:paddingEnd="25dp"
+                    android:paddingRight="40dp"
+                    android:singleLine="true" />
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/edt_lastname"
+                    android:layout_width="170dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_text_border"
+                    android:hint="@string/lname"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:paddingStart="15dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:singleLine="true" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,6 +85,7 @@
                 android:maxLines="1"
                 android:hint="@string/email"
                 android:paddingStart="15dp"
+                android:drawableStart="@drawable/icoemail"
                 android:paddingEnd="15dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edit_text_border"/>
@@ -92,14 +101,26 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:drawableStart="@drawable/icolock"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/edit_text_border"/>
+
+            <CheckBox
+                android:id="@+id/accept_chkbox"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="30dp"
+                android:textColor="@color/darkgrey"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:buttonTint="@color/colorAccent"
+                android:text="Agree to out Terms &amp; Conditions"
+                android:layout_height="match_parent"/>
 
             <Button
                 android:id="@+id/regsiter_btn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/purple"
+                android:background="@drawable/rounded_button"
                 android:onClick="register"
                 android:text="@string/register"
                 android:textColor="@color/white"

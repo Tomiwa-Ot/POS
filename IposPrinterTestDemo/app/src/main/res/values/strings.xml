@@ -45,6 +45,7 @@
     <string name="send" translatable="false" tools:ignore="DuplicateDefinition">Send</string>
     <string name="receive" translatable="false" tools:ignore="DuplicateDefinition">Receive</string>
     <string name="history" translatable="false" tools:ignore="DuplicateDefinition">History</string>
+    <string name="qrcode" translatable="false" tools:ignore="DuplicateDefinition">Qr Code</string>
     <string name="settings" translatable="false" tools:ignore="DuplicateDefinition">Settings</string>
     <string name="print" translatable="false" tools:ignore="DuplicateDefinition">Test Print</string>
     <string name="email" translatable="false" tools:ignore="DuplicateDefinition">Email</string>
