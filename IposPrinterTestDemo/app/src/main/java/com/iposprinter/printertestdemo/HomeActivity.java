@@ -36,11 +36,6 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void qrCode(View view){
-        Intent intent = new Intent(this, QrCodeActivity.class);
-        intent.putExtra("address", "this is the wallet address");
-        startActivity(intent);
-    }
 
     public void send(View view){
         Intent intent = new Intent(this, SendActivity.class);

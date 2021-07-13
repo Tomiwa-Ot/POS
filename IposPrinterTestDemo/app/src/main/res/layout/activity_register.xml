@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     android:background="@color/purple"
     android:gravity="center"
     tools:context=".RegisterActivity">
@@ -15,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:layout_alignParentBottom="true"
-        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
         app:cardCornerRadius="10dp"
         android:background="@color/white"
@@ -30,15 +29,15 @@
                 android:id="@+id/name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/edt_firstname"
-                    android:layout_width="170dp"
+                    android:layout_width="195dp"
                     android:layout_height="45dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_text_border"
                     android:hint="@string/fname"
                     android:inputType="textPersonName"
@@ -51,10 +50,9 @@
 
                 <EditText
                     android:id="@+id/edt_lastname"
-                    android:layout_width="170dp"
+                    android:layout_width="195dp"
                     android:layout_height="45dp"
-                    android:layout_margin="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
                     android:background="@drawable/edit_text_border"
                     android:hint="@string/lname"
                     android:inputType="textPersonName"
@@ -73,7 +71,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:orientation="vertical">
 
             <EditText
@@ -87,8 +86,9 @@
                 android:paddingStart="15dp"
                 android:drawableStart="@drawable/icoemail"
                 android:paddingEnd="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="90dp"
                 android:background="@drawable/edit_text_border"/>
+
 
             <EditText
                 android:id="@+id/edt_passwd"
@@ -100,16 +100,119 @@
                 android:hint="@string/passwd"
                 android:paddingStart="15dp"
                 android:paddingEnd="25dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:drawableStart="@drawable/icolock"
-                android:layout_marginBottom="20dp"
                 android:background="@drawable/edit_text_border"/>
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="Enter a 6 digit pin"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:id="@+id/pin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/digit1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:maxLines="1"
+                    android:maxLength="2"
+                    android:inputType="numberPassword"
+                    android:imeOptions="actionDone"
+                    android:layout_marginEnd="13dp"
+                    android:background="@drawable/pin_border"
+                    android:textAlignment="center"/>
+
+                <EditText
+                    android:id="@+id/digit2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:maxLines="1"
+                    android:maxLength="2"
+                    android:inputType="numberPassword"
+                    android:imeOptions="actionDone"
+                    android:layout_marginEnd="13dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/pin_border"/>
+
+                <EditText
+                    android:id="@+id/digit3"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:maxLines="1"
+                    android:maxLength="2"
+                    android:inputType="numberPassword"
+                    android:imeOptions="actionDone"
+                    android:layout_marginEnd="13dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/pin_border"/>
+
+                <EditText
+                    android:id="@+id/digit4"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:maxLines="1"
+                    android:maxLength="2"
+                    android:inputType="numberPassword"
+                    android:imeOptions="actionDone"
+                    android:layout_marginEnd="13dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/pin_border"/>
+
+                <EditText
+                    android:id="@+id/digit5"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:maxLines="1"
+                    android:maxLength="2"
+                    android:inputType="numberPassword"
+                    android:imeOptions="actionDone"
+                    android:layout_marginEnd="13dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/pin_border"/>
+
+                <EditText
+                    android:id="@+id/digit6"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:maxLines="1"
+                    android:maxLength="2"
+                    android:inputType="numberPassword"
+                    android:imeOptions="actionDone"
+                    android:layout_marginEnd="13dp"
+                    android:textAlignment="center"
+                    android:background="@drawable/pin_border"/>
+
+            </LinearLayout>
+
+            <EditText android:id="@+id/pin_hidden_edittext"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:background="@null"
+                android:cursorVisible="false"
+                android:inputType="numberPassword"
+                android:maxLength="5"
+                android:textColor="#00000000" />
 
             <CheckBox
                 android:id="@+id/accept_chkbox"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="30dp"
                 android:textColor="@color/darkgrey"
+                android:layout_marginTop="15dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:buttonTint="@color/colorAccent"
