@@ -52,4 +52,5 @@
     <string name="passwd" translatable="false" tools:ignore="DuplicateDefinition">Password</string>
     <string name="fname" translatable="false" tools:ignore="DuplicateDefinition">Firstname</string>
     <string name="lname" translatable="false" tools:ignore="DuplicateDefinition">Lastname</string>
+    <string name="copyAddress" translatable="false" tools:ignore="DuplicateDefinition">Tap to copy wallet address</string>
 </resources>

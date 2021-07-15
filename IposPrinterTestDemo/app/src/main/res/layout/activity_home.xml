@@ -10,26 +10,17 @@
     android:background="@color/gainsboro"
     tools:context=".HomeActivity">
 
-<!--    <android.support.design.widget.AppBarLayout-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:background="@color/gainsboro"-->
-<!--        android:elevation="0dp">-->
-
-
-<!--    </android.support.design.widget.AppBarLayout>-->
 
     <android.support.v7.widget.CardView
         android:id="@+id/credit_card"
         android:layout_width="400dp"
         android:layout_height="150dp"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
-        app:cardCornerRadius="10dp"
         android:onClick="copy"
         app:cardBackgroundColor="@color/purple"
+        app:cardCornerRadius="10dp"
         app:cardElevation="15dp">
 
 
@@ -42,13 +33,13 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginRight="40dp"
                 android:layout_marginBottom="60dp"
-                android:text="0.000 BTC"
-                android:textSize="30sp"
-                android:textStyle="bold"
                 android:gravity="center"
+                android:text="0.000 BTC"
                 android:textColor="@color/colorAccent"
-                android:layout_marginRight="40dp"/>
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -63,9 +54,9 @@
                 android:layout_marginTop="100dp"
                 android:layout_marginBottom="10dp"
                 android:text="1zxxzxzxzxzxzxzxzxzxzxzxzxzxzxcd"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="@color/white" />
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
@@ -80,25 +71,40 @@
                 android:layout_marginTop="120dp"
                 android:layout_marginBottom="10dp"
                 android:text="Olaide Bishop"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="@color/white" />
+                android:textStyle="bold" />
 
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="400dp"
+        android:layout_height="40dp"
+        android:id="@+id/tap_to_copy"
+        android:gravity="center"
+        android:layout_below="@id/credit_card">
+
+        <TextView
+            android:layout_width="350dp"
+            android:layout_height="40dp"
+            android:text="@string/copyAddress"
+            android:textColor="@color/purple"
+            android:textSize="15sp"
+            android:textAlignment="center"/>
+
+    </RelativeLayout>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/rounded_container"
-        android:layout_below="@+id/credit_card"
-        android:paddingLeft="20dp"
+        android:layout_below="@+id/tap_to_copy"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="15dp"
-        android:paddingRight="20dp">
+        android:layout_marginBottom="15dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -108,51 +114,85 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="1dp">
+                android:layout_marginTop="30dp">
 
-                <Button
-                    android:id="@+id/buy_btn"
+                <LinearLayout
+                    android:layout_marginBottom="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="buy"
-                    android:text="@string/buy" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/send_btn"
+                    <Button
+                        android:id="@+id/buy_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:onClick="buy"
+                        android:background="@drawable/home_buttons"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:text="@string/buy" />
+
+                    <Button
+                        android:id="@+id/send_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:onClick="send"
+                        android:background="@drawable/home_buttons"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:text="@string/send" />
+
+                    <Button
+                        android:id="@+id/receive_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:onClick="receive"
+                        android:background="@drawable/home_buttons"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:text="@string/receive" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="send"
-                    android:text="@string/send" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/receive_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="receive"
-                    android:text="@string/receive" />
-
-                <Button
-                    android:id="@+id/history_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="history"
-                    android:text="@string/history" />
+                    <Button
+                        android:id="@+id/history_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:onClick="history"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:background="@drawable/home_buttons"
+                        android:text="@string/history" />
 
 
-                <Button
-                    android:id="@+id/logout_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="logout"
-                    android:text="@string/logout" />
+                    <Button
+                        android:id="@+id/logout_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:onClick="logout"
+                        android:background="@drawable/home_buttons"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:text="@string/logout" />
 
-                <Button
-                    android:id="@+id/printer_test_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="testPrint"
-                    android:text="@string/print" />
+                    <Button
+                        android:id="@+id/printer_test_btn"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:onClick="testPrint"
+                        android:textAllCaps="false"
+                        android:background="@drawable/home_buttons"
+                        android:textColor="@color/white"
+                        android:text="@string/print" />
 
+
+                </LinearLayout>
             </LinearLayout>
 
         </ScrollView>

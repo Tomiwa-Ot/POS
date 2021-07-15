@@ -44,6 +44,14 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
+    }
+
     public boolean loginDataValidate(){
         boolean emailValidate, pwdValidate = false;
         t_email = (TextInputLayout) findViewById(R.id.email_input_layout);

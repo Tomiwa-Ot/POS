@@ -3,8 +3,10 @@ package com.iposprinter.printertestdemo;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
     }
 
-    public void copy(){
+    public void copy(View view){
 //        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 //        ClipData clip = ClipData.newPlainText("Someinfo", "Someinfo");
 //        clipboard.setPrimaryClip(clip);
@@ -57,8 +59,39 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = loginState.edit();
         editor.clear();
         editor.commit();
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this,  MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("toLoginPage", true);
         startActivity(intent);
+    }
+
+    public void closeApp(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("Are you sure you want to exit the app?");
+        alertDialog.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        closeApp();
+                    }
+                });
+        alertDialog.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        alertDialog.create();
+        alertDialog.show();
     }
 
     public void testPrint(View view){

@@ -16,7 +16,6 @@
             android:id="@+id/print_qrCode"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:onClick="onClick"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:text="@string/print">
