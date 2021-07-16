@@ -21,18 +21,20 @@ public class ScanQrActivity extends AppCompatActivity implements BarcodeReader.B
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_qr);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
+        setContentView(R.layout.activity_scan_qr);
         barcodeReader = (BarcodeReader) getSupportFragmentManager().findFragmentById(R.id.barcode_scanner);
     }
 
     @Override
     public void onScanned(Barcode barcode) {
-        Intent intent = new Intent();
-        intent.putExtra("qrCodeValue", barcode.displayValue);
-        setResult(Activity.RESULT_OK, intent);
-        finish();
+        barcodeReader.playBeep();
+//        Intent intent = new Intent();
+//        intent.putExtra("qrCodeValue", barcode.displayValue);
+//        setResult(Activity.RESULT_OK, intent);
+//        finish();
+        Toast.makeText(getApplicationContext(), barcode.displayValue.toString(),Toast.LENGTH_SHORT).show();
     }
 
     @Override

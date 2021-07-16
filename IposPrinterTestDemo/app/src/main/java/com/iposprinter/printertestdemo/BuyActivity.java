@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.OnTextChanged;
 
+import com.goodiebag.pinview.Pinview;
 import com.google.android.gms.appindexing.AppIndex;
 import com.iposprinter.iposprinterservice.IPosPrinterCallback;
 import com.iposprinter.iposprinterservice.IPosPrinterService;
@@ -38,7 +40,8 @@ import static com.iposprinter.printertestdemo.MemInfo.bitmapRecycle;
 
 public class BuyActivity extends AppCompatActivity {
 
-    private EditText name, cardNumber, cardDate, cardCVV, amount, walletAddress;
+    private EditText name, cardNumber, cardDate, cardCVV, amountNaira, amountBTC, walletAddress;
+    private Pinview pin;
 
     private static final int CARD_NUMBER_TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
     private static final int CARD_NUMBER_TOTAL_DIGITS = 16; // max numbers of digits in pattern: 0000 x 4
@@ -54,7 +57,6 @@ public class BuyActivity extends AppCompatActivity {
 
     private static final int CARD_CVC_TOTAL_SYMBOLS = 3;
 
-    private Button print_btn;
     private Random random = new Random();
 
     private static final String TAG = "IPosPrinterTestDemo";
@@ -106,6 +108,29 @@ public class BuyActivity extends AppCompatActivity {
     private IPosPrinterService mIPosPrinterService;
     private IPosPrinterCallback callback = null;
     private HandlerUtils.MyHandler handler;
+
+    @OnTextChanged(value = R.id.amount_naira, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    protected void onAmountNairaTextChanged(Editable s){
+        try{
+            double nairaAmount = Double.parseDouble(amountNaira.getText().toString());
+            double btc = nairaAmount * 0.00021221;
+            amountBTC.setText(Double.toString(btc));
+        }catch (Exception exception){
+
+        }
+
+    }
+
+//    @OnTextChanged(value = R.id.amount_btc, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+//    protected void onAmountBTCTextChanged(Editable s){
+//        try{
+//            double btcAmount = Double.parseDouble(amountBTC.getText().toString());
+//            double nairaAmount = btcAmount / 0.00021221;
+//            amountNaira.setText(Double.toString(nairaAmount));
+//        }catch (Exception exception){
+//
+//        }
+//    }
 
     @OnTextChanged(value = R.id.cardNumberEditText, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     protected void onCardNumberTextChanged(Editable s) {
@@ -190,8 +215,10 @@ public class BuyActivity extends AppCompatActivity {
         cardNumber = (EditText) findViewById(R.id.cardNumberEditText);
         cardDate = (EditText) findViewById(R.id.cardDateEditText);
         cardCVV = (EditText) findViewById(R.id.cardCVCEditText);
-        amount = (EditText) findViewById(R.id.amount);
+        amountNaira = (EditText) findViewById(R.id.amount_naira);
+        amountBTC = (EditText) findViewById(R.id.amount_btc);
         walletAddress = (EditText) findViewById(R.id.wallet_address);
+        pin = (Pinview) findViewById(R.id.pinview);
         ButterKnife.bind(this);
         handler = new HandlerUtils.MyHandler(iHandlerIntent);
         callback = new IPosPrinterCallback.Stub() {
@@ -360,10 +387,6 @@ public class BuyActivity extends AppCompatActivity {
         });
     }
 
-//    private void innitView(){
-//        print_btn = (Button) findViewById(R.id.print_btn);
-//        print_btn.setOnClickListener((View.OnClickListener) this);
-//    }
 
     private BroadcastReceiver IPosPrinterStatusListener = new BroadcastReceiver() {
         @TargetApi(Build.VERSION_CODES.DONUT)
@@ -403,14 +426,17 @@ public class BuyActivity extends AppCompatActivity {
     };
 
 
+//    public boolean verifyInput(){
+//        return false;
+//    }
+//
+//    public void pay(){
+//
+//    }
 
     public void onClick(View v){
-        switch (v.getId()){
-            case R.id.print_btn:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printReceipt();
-                break;
-        }
+        if (getPrinterStatus() == PRINTER_NORMAL)
+            printReceipt();
     }
 
     @Override

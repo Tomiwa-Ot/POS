@@ -28,7 +28,6 @@ import android.view.WindowManager;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.iposprinter.iposprinterservice.*;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -127,7 +126,7 @@ public class IPosPrinterTestDemo extends Activity implements OnClickListener {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
+
 
     private void setButtonEnable(boolean flag) {
         b_barcode.setEnabled(flag);
@@ -391,7 +390,6 @@ public class IPosPrinterTestDemo extends Activity implements OnClickListener {
         writePrintDataToCacheFile("*****************", null);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
@@ -442,13 +440,10 @@ public class IPosPrinterTestDemo extends Activity implements OnClickListener {
         Log.e(TAG, "activity onStop");
         super.onStop();// ATTENTION: This was auto-generated to implement the App Indexing API.
 // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
         loopPrintFlag = DEFAULT_LOOP_PRINT;
         unregisterReceiver(IPosPrinterStatusListener);
         unbindService(connectService);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.disconnect();
+
     }
 
     @Override
@@ -1757,9 +1752,6 @@ public class IPosPrinterTestDemo extends Activity implements OnClickListener {
     public void onStart() {
         super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+
     }
 }

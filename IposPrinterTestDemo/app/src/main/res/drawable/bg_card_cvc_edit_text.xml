@@ -4,11 +4,11 @@
 
     <solid android:color="@android:color/white" />
     <stroke
-        android:width="@dimen/half_dp"
-        android:color="@color/black" />
+        android:width="1dp"
+        android:color="@color/ash" />
     <corners
         android:bottomLeftRadius="@dimen/zero"
-        android:bottomRightRadius="@dimen/edit_text_radius"
+        android:bottomRightRadius="5dp"
         android:topLeftRadius="@dimen/zero"
         android:topRightRadius="@dimen/zero" />
 

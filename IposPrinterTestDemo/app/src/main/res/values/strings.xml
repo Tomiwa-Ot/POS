@@ -58,4 +58,7 @@
     <string name="cvv" translatable="false" tools:ignore="DuplicateDefinition">CVV</string>
     <string name="customer" translatable="false" tools:ignore="DuplicateDefinition">Customer Name</string>
     <string name="copyAddress" translatable="false" tools:ignore="DuplicateDefinition">Tap to copy wallet address</string>
+    <string name="btc" translatable="false" tools:ignore="DuplicateDefinition">BTC</string>
+    <string name="amount" translatable="false" tools:ignore="DuplicateDefinition">Amount (₦)</string>
+    <string name="pay" translatable="false" tools:ignore="DuplicateDefinition">Pay</string>
 </resources>

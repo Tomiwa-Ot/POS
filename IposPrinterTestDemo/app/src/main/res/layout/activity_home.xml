@@ -36,10 +36,23 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginBottom="60dp"
                 android:gravity="center"
-                android:text="0.000 BTC"
+                android:text="0.010543 BTC"
                 android:textColor="@color/colorAccent"
                 android:textSize="30sp"
                 android:textStyle="bold" />
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginLeft="40dp"-->
+<!--                android:layout_marginTop="75dp"-->
+<!--                android:layout_marginRight="40dp"-->
+<!--                android:layout_marginBottom="60dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="1 BTC = ₦ 12,073,430.43"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textStyle="bold" />-->
 
         </RelativeLayout>
 
@@ -156,8 +169,17 @@
                         android:textAllCaps="false"
                         android:text="@string/history" />
 
+                <Button
+                    android:id="@+id/settings_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="settings"
+                    android:textAllCaps="false"
+                    android:text="@string/settings" />
 
-                    <Button
+
+
+                <Button
                         android:id="@+id/logout_btn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

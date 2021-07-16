@@ -57,6 +57,11 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void settings(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
     public void logout(View view){
         loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = loginState.edit();
