@@ -14,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if(getIntent().getBooleanExtra("EXIT", false)){
-            finishAffinity();
+            int pid = android.os.Process.myPid();
+            android.os.Process.killProcess(pid);
         }else if(getIntent().getBooleanExtra("toLoginPage", false)){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

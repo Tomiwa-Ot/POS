@@ -17,6 +17,8 @@ import android.widget.Toast;
 public class HomeActivity extends AppCompatActivity {
 
     SharedPreferences loginState;
+    ClipboardManager myClipboard;
+    ClipData myClip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +29,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void copy(View view){
-//        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-//        ClipData clip = ClipData.newPlainText("Someinfo", "Someinfo");
-//        clipboard.setPrimaryClip(clip);
+        myClipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+        String text = "replace with wallet address";
+        myClip = ClipData.newPlainText("text", text);
+        myClipboard.setPrimaryClip(myClip);
         Toast.makeText(getApplicationContext(),"Wallet Address Copied",Toast.LENGTH_SHORT).show();
     }
 
@@ -66,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void closeApp(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("EXIT", true);
         startActivity(intent);
@@ -83,13 +86,7 @@ public class HomeActivity extends AppCompatActivity {
                         closeApp();
                     }
                 });
-        alertDialog.setNegativeButton("No",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
+        alertDialog.setNegativeButton("No", null);
         alertDialog.create();
         alertDialog.show();
     }

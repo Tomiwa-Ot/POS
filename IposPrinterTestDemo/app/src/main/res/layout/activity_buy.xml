@@ -1,26 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/gainsboro"
     tools:context=".BuyActivity">
 
-
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/name_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/print_btn"
+        <EditText
+            android:id="@+id/customerName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="-0.25dp"
+            android:background="@drawable/bg_card_number_edit_text"
+            android:hint="@string/customer"
+            android:inputType="textPersonName"
+            android:padding="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            tools:ignore="LabelFor,NegativeMargin" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/cardNumberEditText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="-0.25dp"
+            android:background="@drawable/bg_card_number_edit_text"
+            android:drawableRight="@drawable/ic_card_number"
+            android:hint="@string/cardNumber"
+            android:inputType="phone"
+            android:padding="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            tools:ignore="LabelFor,NegativeMargin" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="@string/print" />
+            android:layout_marginTop="-0.25dp"
+            android:orientation="horizontal"
+            tools:ignore="NegativeMargin">
 
-    </ScrollView>
-</LinearLayout>
+            <EditText
+                android:id="@+id/cardDateEditText"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginRight="-0.25dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_card_date_edit_text"
+                android:drawableRight="@drawable/ic_card_date"
+                android:hint="@string/cardDate"
+                android:inputType="date"
+                android:padding="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                tools:ignore="LabelFor,RtlHardcoded" />
+
+            <EditText
+                android:id="@+id/cardCVCEditText"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="-0.25dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_card_cvc_edit_text"
+                android:drawableRight="@drawable/ic_card_cvc"
+                android:hint="@string/cvv"
+                android:inputType="number"
+                android:padding="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                tools:ignore="LabelFor,RtlHardcoded" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="210dp"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="-0.25dp"
+            android:background="@drawable/bg_card_number_edit_text"
+            android:hint="Amount"
+            android:inputType="phone"
+            android:padding="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            tools:ignore="LabelFor,NegativeMargin" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/wallet_address"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="-0.25dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_card_number_edit_text"
+                android:hint="@string/walletAddress"
+                android:inputType="text"
+                android:padding="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                tools:ignore="LabelFor,NegativeMargin" />
+
+
+            <ImageButton
+                android:id="@+id/scan_qr"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/icon_qr_code"
+                android:scaleType="fitCenter"
+                android:onClick="scanQRCode"
+                android:background="@color/white"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:text="Button"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/print_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:textColor="@color/white"
+        android:background="@color/purple"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Pay" />
+
+</RelativeLayout>
 

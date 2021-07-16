@@ -102,9 +102,11 @@
         android:layout_height="match_parent"
         android:background="@drawable/rounded_container"
         android:layout_below="@+id/tap_to_copy"
+        android:paddingLeft="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:paddingRight="20dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -114,86 +116,66 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="30dp"
+                android:paddingTop="1dp">
 
-                <LinearLayout
-                    android:layout_marginBottom="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+
 
                     <Button
                         android:id="@+id/buy_btn"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:onClick="buy"
-                        android:background="@drawable/home_buttons"
-                        android:textColor="@color/white"
                         android:textAllCaps="false"
                         android:text="@string/buy" />
 
                     <Button
                         android:id="@+id/send_btn"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:onClick="send"
-                        android:background="@drawable/home_buttons"
                         android:textAllCaps="false"
-                        android:textColor="@color/white"
                         android:text="@string/send" />
 
                     <Button
                         android:id="@+id/receive_btn"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:onClick="receive"
-                        android:background="@drawable/home_buttons"
                         android:textAllCaps="false"
-                        android:textColor="@color/white"
                         android:text="@string/receive" />
 
 
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/history_btn"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:onClick="history"
                         android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:background="@drawable/home_buttons"
                         android:text="@string/history" />
 
 
                     <Button
                         android:id="@+id/logout_btn"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:onClick="logout"
-                        android:background="@drawable/home_buttons"
                         android:textAllCaps="false"
-                        android:textColor="@color/white"
                         android:text="@string/logout" />
 
                     <Button
                         android:id="@+id/printer_test_btn"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:onClick="testPrint"
                         android:textAllCaps="false"
-                        android:background="@drawable/home_buttons"
-                        android:textColor="@color/white"
                         android:text="@string/print" />
 
 
-                </LinearLayout>
             </LinearLayout>
+
 
         </ScrollView>
 
