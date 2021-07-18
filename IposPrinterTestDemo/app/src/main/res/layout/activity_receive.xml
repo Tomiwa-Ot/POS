@@ -7,23 +7,6 @@
     android:background="@color/white"
     tools:context=".ReceiveActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="right">
-
-        <Button
-            android:id="@+id/print_qrCode"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:onClick="onClick"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:text="@string/print">
-
-        </Button>
-
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,8 +18,20 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="100dp" />
+
+
+        <Button
+            android:id="@+id/print_qrCode"
+            android:onClick="onClick"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:background="@color/purple"
+            android:layout_height="wrap_content"
+            android:text="Wallet QR Code" />
 
     </RelativeLayout>
+
 
 </android.support.constraint.ConstraintLayout>

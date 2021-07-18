@@ -175,7 +175,7 @@ public class ReceiveActivity extends AppCompatActivity {
                     }
                     break;
                 case MSG_IS_BUSY:
-                    Toast.makeText(ReceiveActivity.this, R.string.printer_is_working, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ReceiveActivity.this, "QR Code is printing", Toast.LENGTH_SHORT).show();
                     break;
                 case MSG_PAPER_LESS:
                     loopPrintFlag = DEFAULT_LOOP_PRINT;
