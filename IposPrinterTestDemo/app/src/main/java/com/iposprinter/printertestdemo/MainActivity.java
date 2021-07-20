@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
         }else if(getIntent().getBooleanExtra("toLoginPage", false)){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+        } else if(getIntent().getBooleanExtra("signUp", false)){
+          Intent intent = new Intent(this, HomeActivity.class);
+          startActivity(intent);
         } else{
             super.onCreate(savedInstanceState);
             requestWindowFeature(Window.FEATURE_NO_TITLE);

@@ -87,6 +87,20 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="registerPage"
+                android:textAllCaps="false"
+                android:elevation="0dp"
+                android:id="@+id/btn_register_page"
+                android:shadowColor="@color/white"
+                android:backgroundTint="@color/white"
+                android:background="@color/white"
+                android:textColor="@color/colorAccent"
+                android:text="Don't have an account? Sign Up"
+                android:textSize="15sp"/>
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

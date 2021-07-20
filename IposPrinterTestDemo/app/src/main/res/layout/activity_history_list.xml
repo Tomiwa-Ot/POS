@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/history_amount"
+        android:layout_width="250dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/history_name"
+        android:layout_width="250dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/history_date"
+        android:layout_width="250dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="50dp"
+        android:textSize="15sp"
+        android:layout_height="50dp"/>
+
+
+    <ImageButton
+        android:layout_width="45dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/white"
+        android:layout_height="45dp"
+        android:elevation="0dp"
+        android:onClick="printReceipt"
+        android:layout_alignParentRight="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_print" />
+
+</RelativeLayout>

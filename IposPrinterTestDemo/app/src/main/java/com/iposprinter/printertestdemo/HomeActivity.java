@@ -14,6 +14,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 public class HomeActivity extends AppCompatActivity {
 
     SharedPreferences loginState;
@@ -67,6 +70,8 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = loginState.edit();
         editor.clear();
         editor.commit();
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        mQueue.getCache().clear();
         Intent intent = new Intent(this,  MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("toLoginPage", true);

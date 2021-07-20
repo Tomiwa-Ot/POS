@@ -44,6 +44,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public void registerPage(View view){
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);

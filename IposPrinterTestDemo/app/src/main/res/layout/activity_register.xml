@@ -12,10 +12,11 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="40dp"
         app:cardCornerRadius="10dp"
         android:background="@color/white"
         app:cardElevation="5dp">
@@ -23,41 +24,40 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="120dp">
+            android:layout_marginTop="70dp">
 
             <LinearLayout
                 android:id="@+id/name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/edt_firstname"
-                    android:layout_width="195dp"
+                    android:layout_width="172dp"
                     android:layout_height="45dp"
+                    android:layout_marginRight="5dp"
                     android:background="@drawable/edit_text_border"
                     android:hint="@string/fname"
                     android:inputType="textPersonName"
                     android:maxLines="1"
                     android:paddingStart="15dp"
-                    android:paddingLeft="40dp"
-                    android:paddingEnd="25dp"
                     android:paddingRight="40dp"
                     android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/edt_lastname"
-                    android:layout_width="195dp"
+                    android:layout_width="172dp"
                     android:layout_height="45dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:background="@drawable/edit_text_border"
                     android:hint="@string/lname"
                     android:inputType="textPersonName"
                     android:maxLines="1"
                     android:paddingStart="15dp"
-                    android:paddingLeft="40dp"
                     android:paddingRight="40dp"
                     android:singleLine="true" />
 
@@ -82,9 +82,11 @@
                 android:singleLine="true"
                 android:maxLines="1"
                 android:hint="@string/email"
-                android:paddingStart="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:drawableStart="@drawable/icoemail"
                 android:paddingEnd="15dp"
+                android:paddingStart="15dp"
                 android:layout_marginTop="110dp"
                 android:background="@drawable/edit_text_border"/>
 
@@ -96,9 +98,11 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:maxLines="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:hint="@string/passwd"
                 android:paddingStart="15dp"
-                android:paddingEnd="25dp"
+                android:paddingEnd="15dp"
                 android:layout_marginTop="20dp"
                 android:drawableStart="@drawable/icolock"
                 android:background="@drawable/edit_text_border"/>
@@ -136,7 +140,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:buttonTint="@color/colorAccent"
-                android:text="Agree to out Terms &amp; Conditions"
+                android:text="Agree to our Terms &amp; Conditions"
                 android:layout_height="match_parent"/>
 
             <Button
