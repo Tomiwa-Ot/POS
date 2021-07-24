@@ -55,6 +55,11 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void withdraw(View view){
+        Intent intent = new Intent(this, WithdrawActivity.class);
+        startActivity(intent);
+    }
+
     public void history(View view){
         Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);

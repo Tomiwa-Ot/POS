@@ -28,13 +28,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity"
-            android:parentActivityName=".LoginActivity"/>
+        <activity
+            android:name=".RegisterActivity"
+            android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".HomeActivity"
             android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".ReceiveActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".WithdrawActivity"
             android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".SendActivity"

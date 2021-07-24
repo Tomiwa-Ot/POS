@@ -61,6 +61,5 @@
     <string name="btc" translatable="false" tools:ignore="DuplicateDefinition">BTC</string>
     <string name="amount" translatable="false" tools:ignore="DuplicateDefinition">Amount (₦)</string>
     <string name="pay" translatable="false" tools:ignore="DuplicateDefinition">Pay</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="withdraw" translatable="false" tools:ignore="DuplicateDefinition">Withdraw</string>
 </resources>
