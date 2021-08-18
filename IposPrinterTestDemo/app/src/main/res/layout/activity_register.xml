@@ -87,8 +87,7 @@
                 android:drawableStart="@drawable/icoemail"
                 android:paddingEnd="15dp"
                 android:paddingStart="15dp"
-                android:layout_marginTop="110dp"
-                android:background="@drawable/edit_text_border"/>
+                android:layout_marginTop="110dp" />
 
 
             <EditText
@@ -104,8 +103,7 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/icolock"
-                android:background="@drawable/edit_text_border"/>
+                android:drawableStart="@drawable/icolock" />
 
             <TextView
                 android:layout_width="150dp"

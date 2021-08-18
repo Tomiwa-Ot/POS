@@ -8,9 +8,12 @@ import android.graphics.PorterDuff;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import org.w3c.dom.Text;
@@ -31,10 +34,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         email = (EditText) findViewById(R.id.edt_email);
         passwd = (EditText) findViewById(R.id.edt_passwd);
+        moveToHomeActivity();
     }
+
 
     public void login(View view){
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         if(loginDataValidate()){
             loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = loginState.edit();
@@ -49,13 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("EXIT", true);
-        startActivity(intent);
-    }
 
     public boolean loginDataValidate(){
         boolean emailValidate, pwdValidate = false;
@@ -81,4 +80,16 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
     }
+
+    public void moveToHomeActivity(){
+        loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
+        boolean isLoggedIn = loginState.getBoolean("isLoggedIn", false);
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        if(isLoggedIn){
+            startActivity(intent);
+        }
+    }
+
+
 }

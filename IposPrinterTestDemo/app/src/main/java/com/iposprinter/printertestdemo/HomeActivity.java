@@ -1,5 +1,6 @@
 package com.iposprinter.printertestdemo;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -75,36 +76,14 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = loginState.edit();
         editor.clear();
         editor.commit();
-        RequestQueue mQueue = Volley.newRequestQueue(this);
-        mQueue.getCache().clear();
-        Intent intent = new Intent(this,  MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("toLoginPage", true);
+//        RequestQueue mQueue = Volley.newRequestQueue(this);
+//        mQueue.getCache().clear();
+        Intent intent = new Intent(this,  LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
-    public void closeApp(){
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("EXIT", true);
-        startActivity(intent);
-    }
 
-    @Override
-    public void onBackPressed() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("Are you sure you want to exit the app?");
-        alertDialog.setPositiveButton("Yes",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        closeApp();
-                    }
-                });
-        alertDialog.setNegativeButton("No", null);
-        alertDialog.create();
-        alertDialog.show();
-    }
 
     public void testPrint(View view){
         Intent intent = new Intent(this, IPosPrinterTestDemo.class);

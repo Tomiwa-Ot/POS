@@ -9,6 +9,8 @@
     android:padding="16dp"
     android:background="@color/purple"
     android:gravity="center"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".LoginActivity">
 
 
@@ -47,8 +49,7 @@
                     android:paddingEnd="15dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/edit_text_border"/>
+                    android:layout_marginTop="20dp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -56,7 +57,8 @@
                 android:id="@+id/passwd_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true">
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true">
 
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/edt_passwd"
@@ -71,8 +73,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/edit_text_border"/>
+                    android:layout_marginRight="10dp" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -83,6 +84,8 @@
                 android:layout_height="50dp"
                 android:background="@drawable/rounded_button"
                 android:onClick="login"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:text="@string/login"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
