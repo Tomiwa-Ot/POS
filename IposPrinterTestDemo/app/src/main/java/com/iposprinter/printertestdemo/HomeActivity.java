@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
         loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = loginState.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
 //        RequestQueue mQueue = Volley.newRequestQueue(this);
 //        mQueue.getCache().clear();
         Intent intent = new Intent(this,  LoginActivity.class);

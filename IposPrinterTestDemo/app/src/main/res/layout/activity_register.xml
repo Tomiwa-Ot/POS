@@ -40,7 +40,6 @@
                     android:layout_width="172dp"
                     android:layout_height="45dp"
                     android:layout_marginRight="5dp"
-                    android:background="@drawable/edit_text_border"
                     android:hint="@string/fname"
                     android:inputType="textPersonName"
                     android:maxLines="1"
@@ -53,7 +52,6 @@
                     android:layout_width="172dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="5dp"
-                    android:background="@drawable/edit_text_border"
                     android:hint="@string/lname"
                     android:inputType="textPersonName"
                     android:maxLines="1"
@@ -145,11 +143,19 @@
                 android:id="@+id/regsiter_btn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:background="@drawable/rounded_button"
                 android:onClick="register"
                 android:text="@string/register"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/register_progress"
+                android:visibility="gone"/>
 
 
         </LinearLayout>

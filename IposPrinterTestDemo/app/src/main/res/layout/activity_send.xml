@@ -144,13 +144,21 @@
             app:inputType="number"
             app:password="true"/>
 
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/send_progress"/>
+
     </LinearLayout>
+
 
     <Button
         android:id="@+id/pay_btn"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:textColor="@color/white"
+        android:onClick="transaction"
         android:background="@color/purple"
         android:layout_height="wrap_content"
         android:text="@string/send" />

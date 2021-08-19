@@ -207,6 +207,12 @@
             app:inputType="number"
             app:password="true"/>
 
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buy_progress"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
     <Button
