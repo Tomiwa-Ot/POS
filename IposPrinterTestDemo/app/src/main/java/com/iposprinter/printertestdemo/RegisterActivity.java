@@ -68,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
                             editor.putString("id", obj.getString("id"));
                             editor.apply();
                             startActivity(intent);
-                        }else if(obj.getString("status").equals("email already registered")){
+                        }else if(obj.getString("status").equals("account exists")){
                             progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(RegisterActivity.this, "Email is already registered", Toast.LENGTH_SHORT).show();
                         } else{
