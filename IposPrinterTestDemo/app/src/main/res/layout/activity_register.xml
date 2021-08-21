@@ -24,7 +24,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="70dp">
+            android:layout_marginTop="20dp">
 
             <LinearLayout
                 android:id="@+id/name_layout"
@@ -35,29 +35,50 @@
                 android:layout_marginLeft="10dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/edt_firstname"
-                    android:layout_width="172dp"
-                    android:layout_height="45dp"
-                    android:layout_marginRight="5dp"
-                    android:hint="@string/fname"
-                    android:inputType="textPersonName"
-                    android:maxLines="1"
-                    android:paddingStart="15dp"
-                    android:paddingRight="40dp"
-                    android:singleLine="true" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/firstname_input_layout"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true">
 
-                <EditText
-                    android:id="@+id/edt_lastname"
-                    android:layout_width="172dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="5dp"
-                    android:hint="@string/lname"
-                    android:inputType="textPersonName"
-                    android:maxLines="1"
-                    android:paddingStart="15dp"
-                    android:paddingRight="40dp"
-                    android:singleLine="true" />
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edt_firstname"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:hint="@string/fname"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="20dp"
+                        android:singleLine="true"/>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/lastname_input_layout"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edt_lastname"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:hint="@string/lname"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="20dp"
+                        android:singleLine="true"/>
+
+                </android.support.design.widget.TextInputLayout>
+
 
             </LinearLayout>
 
@@ -70,38 +91,57 @@
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/edt_email"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/email_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:inputType="textEmailAddress"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:hint="@string/email"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:drawableStart="@drawable/icoemail"
-                android:paddingEnd="15dp"
-                android:paddingStart="15dp"
-                android:layout_marginTop="110dp" />
+                android:layout_height="wrap_content"
+                app:errorEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:drawableStart="@drawable/icoemail"
+                    android:maxLines="1"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp" />
+
+            </android.support.design.widget.TextInputLayout>
 
 
-            <EditText
-                android:id="@+id/edt_passwd"
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/passwd_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:inputType="textPassword"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:hint="@string/passwd"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:layout_marginTop="20dp"
-                android:drawableStart="@drawable/icolock" />
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/edt_passwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:hint="@string/passwd"
+                    android:inputType="textPassword"
+                    android:drawableStart="@drawable/icolock"
+                    android:maxLines="1"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
 
             <TextView
                 android:layout_width="150dp"

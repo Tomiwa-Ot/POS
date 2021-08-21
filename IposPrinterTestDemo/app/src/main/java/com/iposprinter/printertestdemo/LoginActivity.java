@@ -61,6 +61,11 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("id", object.getString("id"));
                     editor.apply();
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    intent.putExtra("firstname", object.getString("firstname"));
+                    intent.putExtra("lastname", object.getString("lastname"));
+                    intent.putExtra("email", object.getString("email"));
+                    intent.putExtra("wallet", object.getString("wallet"));
+                    intent.putExtra("id", object.getString("id"));
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }catch(JSONException jsonException){
@@ -149,7 +154,16 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         if(isLoggedIn){
-            // get shared data and pass
+            String firstname = loginState.getString("firstname", null);
+            String lastname = loginState.getString("lastname", null);
+            String email = loginState.getString("email", null);
+            String wallet = loginState.getString("wallet", null);
+            String id = loginState.getString("id", null);
+            intent.putExtra("firstname", firstname);
+            intent.putExtra("lastname", lastname);
+            intent.putExtra("email", email);
+            intent.putExtra("wallet", wallet);
+            intent.putExtra("id", id);
             startActivity(intent);
         }
     }

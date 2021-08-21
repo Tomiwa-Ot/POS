@@ -49,6 +49,7 @@
     <string name="settings" translatable="false" tools:ignore="DuplicateDefinition">Settings</string>
     <string name="print" translatable="false" tools:ignore="DuplicateDefinition">Test Print</string>
     <string name="email" translatable="false" tools:ignore="DuplicateDefinition">Email</string>
+    <string name="fullname" translatable="false" tools:ignore="DuplicateDefinition">Fullname</string>
     <string name="passwd" translatable="false" tools:ignore="DuplicateDefinition">Password</string>
     <string name="fname" translatable="false" tools:ignore="DuplicateDefinition">Firstname</string>
     <string name="lname" translatable="false" tools:ignore="DuplicateDefinition">Lastname</string>

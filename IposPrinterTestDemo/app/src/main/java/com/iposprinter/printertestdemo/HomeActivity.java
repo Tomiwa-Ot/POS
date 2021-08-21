@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -24,18 +25,28 @@ public class HomeActivity extends AppCompatActivity {
     ClipboardManager myClipboard;
     ClipData myClip;
 
+    private TextView wallet, name;
+    private String fullname, email, address, id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_home);
+        wallet = (TextView) findViewById(R.id.txt_wallet);
+        name = (TextView) findViewById(R.id.txt_name);
+        fullname = getIntent().getStringExtra("lastname") + " " + getIntent().getStringExtra("firstname");
+        email = getIntent().getStringExtra("email");
+        address = getIntent().getStringExtra("wallet");
+        id = getIntent().getStringExtra("id");
+        name.setText(fullname);
+        wallet.setText(address);
     }
 
     public void copy(View view){
         myClipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
-        String text = "replace with wallet address";
-        myClip = ClipData.newPlainText("text", text);
+        myClip = ClipData.newPlainText("text", address);
         myClipboard.setPrimaryClip(myClip);
         Toast.makeText(getApplicationContext(),"Wallet Address Copied",Toast.LENGTH_SHORT).show();
     }
@@ -58,6 +69,10 @@ public class HomeActivity extends AppCompatActivity {
 
     public void withdraw(View view){
         Intent intent = new Intent(this, WithdrawActivity.class);
+        intent.putExtra("fullname", fullname);
+        intent.putExtra("email", email);
+        intent.putExtra("address", address);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 
