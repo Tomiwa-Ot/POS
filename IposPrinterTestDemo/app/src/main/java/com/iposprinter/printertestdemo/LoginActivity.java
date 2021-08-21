@@ -15,9 +15,12 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,8 +32,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText email, passwd;
     private ProgressBar progressBar;
+    private ResponseListener listener;
     SharedPreferences loginState;
     private static final String LOGIN_URL = "https://tomiwa.com.ng/btcpos-proj/login";
+
+    public interface ResponseListener{
+        void gotResponse(JSONObject object);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +47,27 @@ public class LoginActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
+        listener = new ResponseListener() {
+            @Override
+            public void gotResponse(JSONObject object) {
+                try{
+                    loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = loginState.edit();
+                    editor.putBoolean("isLoggedIn", true);
+                    editor.putString("firstname", object.getString("firstname"));
+                    editor.putString("lastname", object.getString("lastname"));
+                    editor.putString("email", email.getText().toString());
+                    editor.putString("wallet", object.getString("wallet"));
+                    editor.putString("id", object.getString("id"));
+                    editor.apply();
+                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }catch(JSONException jsonException){
+                    jsonException.printStackTrace();
+                }
+            }
+        };
         email = (EditText) findViewById(R.id.edt_email);
         passwd = (EditText) findViewById(R.id.edt_passwd);
         progressBar = (ProgressBar) findViewById(R.id.login_progress);
@@ -47,38 +77,28 @@ public class LoginActivity extends AppCompatActivity {
     public void login(View view){
         if(loginDataValidate()){
             progressBar.setVisibility(View.VISIBLE);
-            new StringRequest(Request.Method.POST, LOGIN_URL,
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         try{
                             JSONObject obj = new JSONObject(response);
                             if(obj.getString("status").equals("success")){
-                                loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = loginState.edit();
-                                editor.putBoolean("isLoggedIn", true);
-                                editor.putString("firstname", obj.getString("firstname"));
-                                editor.putString("lastname", obj.getString("lastname"));
-                                editor.putString("email", email.getText().toString());
-                                editor.putString("address", obj.getString("address"));
-                                editor.putString("id", obj.getString("id"));
-                                editor.apply();
-                                startActivity(intent);
+                                listener.gotResponse(obj);
                             }else{
-                                progressBar.setVisibility(View.INVISIBLE);
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(LoginActivity.this, "Login Failed! Invalid username/password", Toast.LENGTH_LONG).show();
                             }
                         } catch(JSONException e){
-                            progressBar.setVisibility(View.INVISIBLE);
+                            progressBar.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    progressBar.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -91,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                     return params;
                 }
             };
+            requestQueue.add(stringRequest);
         }
     }
 
