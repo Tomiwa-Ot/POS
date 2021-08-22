@@ -39,6 +39,10 @@ public class HomeActivity extends AppCompatActivity {
 
         Uri uri = getIntent().getData();
         if(uri != null){
+//            fullname = loginState.getString("lastname", null) + " " + loginState.getString("firstname", null);
+//            email = loginState.getString("email", null);
+//            address = loginState.getString("wallet", null);
+//            id = loginState.getString("id", null);
             Toast.makeText(this, uri.toString(), Toast.LENGTH_SHORT).show();
         }
     }

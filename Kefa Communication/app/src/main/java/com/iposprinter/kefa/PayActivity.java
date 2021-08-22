@@ -65,38 +65,58 @@ public class PayActivity extends AppCompatActivity {
 
     public void onClick(View view){
         if(formValidate()){
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, PIN_VERIFY,
-                    new Response.Listener<String>() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Fill all fields");
+            builder.setCancelable(true);
+            builder.setPositiveButton(
+                    "Proceed", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onResponse(String response) {
-                            try{
-                                JSONObject obj = new JSONObject(response);
-                                if(obj.getString("status").equals("valid")){
-                                    listener.gotResponse();
-                                }else{
-                                    Toast.makeText(PayActivity.this, "Invalid PIN", Toast.LENGTH_LONG).show();
-                                }
-                            }catch (JSONException jsonException){
-
-                            }
+                        public void onClick(DialogInterface dialog, int which) {
+                            // dialog.cancel();
                         }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
+                    }
+            );
+            builder.setNegativeButton(
+                "Close", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       dialog.cancel();
+                    }
                 }
-            }
-            ){
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("email", email);
-                    params.put("pin", pin.getValue());
-                    return params;
-                }
-            };
-            requestQueue.add(stringRequest);
+            );
+            builder.show();
+//            RequestQueue requestQueue = Volley.newRequestQueue(this);
+//            StringRequest stringRequest = new StringRequest(Request.Method.POST, PIN_VERIFY,
+//                    new Response.Listener<String>() {
+//                        @Override
+//                        public void onResponse(String response) {
+//                            try{
+//                                JSONObject obj = new JSONObject(response);
+//                                if(obj.getString("status").equals("valid")){
+//                                    listener.gotResponse();
+//                                }else{
+//                                    Toast.makeText(PayActivity.this, "Invalid PIN", Toast.LENGTH_LONG).show();
+//                                }
+//                            }catch (JSONException jsonException){
+//
+//                            }
+//                        }
+//                    }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//
+//                }
+//            }
+//            ){
+//                @Override
+//                protected Map<String, String> getParams() throws AuthFailureError {
+//                    Map<String, String> params = new HashMap<>();
+//                    params.put("email", email);
+//                    params.put("pin", pin.getValue());
+//                    return params;
+//                }
+//            };
+//            requestQueue.add(stringRequest);
         }else{
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Fill all fields");
