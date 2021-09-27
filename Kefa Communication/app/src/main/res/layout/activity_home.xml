@@ -142,30 +142,30 @@
                         android:textAllCaps="false"
                         android:text="@string/buy" />
 
-                    <Button
-                        android:id="@+id/send_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="send"
-                        android:textAllCaps="false"
-                        android:text="@string/send" />
+<!--                    <Button-->
+<!--                        android:id="@+id/send_btn"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:onClick="send"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:text="@string/send" />-->
 
-                    <Button
-                        android:id="@+id/receive_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="receive"
-                        android:textAllCaps="false"
-                        android:text="@string/receive" />
+<!--                    <Button-->
+<!--                        android:id="@+id/receive_btn"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:onClick="receive"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:text="@string/receive" />-->
 
 
-                <Button
-                    android:id="@+id/withdraw_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="pay"
-                    android:textAllCaps="false"
-                    android:text="@string/pay" />
+<!--                <Button-->
+<!--                    android:id="@+id/withdraw_btn"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:onClick="pay"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:text="@string/pay" />-->
 
 
                     <Button

@@ -69,7 +69,7 @@ public class IPosPrinterTestDemo extends Activity implements OnClickListener {
     /*定义打印机状态*/
     private final int PRINTER_NORMAL = 0;
     private final int PRINTER_PAPERLESS = 1;
-    private final int PRINTER_THP_HIGH_TEMPERATURE = 2;
+    private final int PRINTER_THP_HIGH_TfEMPERATURE = 2;
     private final int PRINTER_MOTOR_HIGH_TEMPERATURE = 3;
     private final int PRINTER_IS_BUSY = 4;
     private final int PRINTER_ERROR_UNKNOWN = 5;

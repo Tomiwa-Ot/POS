@@ -445,41 +445,41 @@ public class BuyActivity extends AppCompatActivity {
 //    }
 //
     public void pay(){
-        new StringRequest(Request.Method.POST, BUY_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject obj = new JSONObject(response);
-                            if(obj.getString("status").equals("success")){
-                                verifyTransaction();
-                            }else if(obj.getString("status").equals("invalid pin")){
-                                progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(BuyActivity.this, "INVALID PIN", Toast.LENGTH_LONG).show();
-                            }else{
-                                progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(BuyActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
-                            }
-                        }catch (JSONException exception){
-
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }
-        ){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", walletAddress.getText().toString());
-                params.put("name", name.getText().toString());
-                params.put("amount", amountBTC.getText().toString());
-                return params;
-            }
-        };
+//        new StringRequest(Request.Method.POST, BUY_URL,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try{
+//                            JSONObject obj = new JSONObject(response);
+//                            if(obj.getString("status").equals("success")){
+//                                verifyTransaction();
+//                            }else if(obj.getString("status").equals("invalid pin")){
+//                                progressBar.setVisibility(View.INVISIBLE);
+//                                Toast.makeText(BuyActivity.this, "INVALID PIN", Toast.LENGTH_LONG).show();
+//                            }else{
+//                                progressBar.setVisibility(View.INVISIBLE);
+//                                Toast.makeText(BuyActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
+//                            }
+//                        }catch (JSONException exception){
+//
+//                        }
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//            }
+//        }
+//        ){
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("email", walletAddress.getText().toString());
+//                params.put("name", name.getText().toString());
+//                params.put("amount", amountBTC.getText().toString());
+//                return params;
+//            }
+//        };
     }
 
     public void sendBTC(){
@@ -528,8 +528,8 @@ public class BuyActivity extends AppCompatActivity {
     public void onClick(View v){
         // check if wallet balance
 
-//        if (getPrinterStatus() == PRINTER_NORMAL)
-//            printReceipt();
+        if (getPrinterStatus() == PRINTER_NORMAL)
+            printReceipt();
     }
 
     @Override
@@ -588,25 +588,56 @@ public class BuyActivity extends AppCompatActivity {
 
     public void printReceipt(){
         ThreadPoolManager.getInstance().executeTask(new Runnable() {
+
             @Override
             public void run() {
-                Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.test);
                 try {
-                    mIPosPrinterService.printSpecifiedTypeText("Bitcoin POS\n", "ST", 48, callback);
-                    mIPosPrinterService.printSpecifiedTypeText("Peace John Eyibio\n", "ST", 32, callback);
-                    mIPosPrinterService.printSpecifiedTypeText("\n", "ST", 22, callback);
-                    mIPosPrinterService.printBlankLines(1, 16, callback);
-                    mIPosPrinterService.printSpecifiedTypeText("ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789\n", "ST", 16, callback);
-                    mIPosPrinterService.setPrinterPrintAlignment(0, callback);
-                    mIPosPrinterService.printQRCode("Bitcoin POS\n", 10, 1, callback);
-                    mIPosPrinterService.printSpecifiedTypeText("**********END***********\n\n", "ST", 32, callback);
-                    bitmapRecycle(mBitmap);
+                    mIPosPrinterService.printSpecifiedTypeText("  #1  美团测试\n\n", "ST", 48, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("      粤香港式烧腊(第1联)\n\n", "ST", 24, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("------------------------\n\n*********预订单*********\n", "ST", 32, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("  期望送达时间:[18:00]\n\n", "ST", 32, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("--------------------------------\n下单时间: " + "01-01 12:00", "ST", 24, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("备注: 别太辣\n", "ST", 32, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("菜品          数量   小计" + "金额\n--------------------------------\n\n", "ST", 24, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("红烧肉          X1    12\n红烧肉1         X1   " + " 12\n红烧肉2         X1    12\n\n", "ST", 32, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("--------------------------------\n", "ST", 24, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("配送费                         5\n餐盒费        " +
+                            " " +
+                            " " +
+                            "               1\n[超时赔付] - 详见订单\n可口可乐: x1", "ST", 24, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("--------------------------------\n", "ST", 24, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("合计                18元\n\n", "ST", 32, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("--------------------------------\n", "ST", 24, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("张* 18312345678\n地址信息\n", "ST", 48, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("--------------------------------\n", "ST", 24, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("  #1  美团测试\n\n\n", "ST", 48, callback);
+
                     mIPosPrinterService.printerPerformPrint(160, callback);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
             }
         });
+//        ThreadPoolManager.getInstance().executeTask(new Runnable() {
+//            @Override
+//            public void run() {
+//                Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.test);
+//                try {
+//                    mIPosPrinterService.printSpecifiedTypeText("Bitcoin POS\n", "ST", 48, callback);
+//                    mIPosPrinterService.printSpecifiedTypeText("Peace John Eyibio\n", "ST", 32, callback);
+//                    mIPosPrinterService.printSpecifiedTypeText("\n", "ST", 22, callback);
+//                    mIPosPrinterService.printBlankLines(1, 16, callback);
+//                    mIPosPrinterService.printSpecifiedTypeText("ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789\n", "ST", 16, callback);
+//                    mIPosPrinterService.setPrinterPrintAlignment(0, callback);
+//                    mIPosPrinterService.printQRCode("Bitcoin POS\n", 10, 1, callback);
+//                    mIPosPrinterService.printSpecifiedTypeText("**********END***********\n\n", "ST", 32, callback);
+//                    bitmapRecycle(mBitmap);
+//                    mIPosPrinterService.printerPerformPrint(160, callback);
+//                } catch (RemoteException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
     @Override
