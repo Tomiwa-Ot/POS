@@ -28,11 +28,9 @@ public class HomeActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_home);
-        wallet = (TextView) findViewById(R.id.txt_wallet);
         name = (TextView) findViewById(R.id.txt_name);
         fullname = getIntent().getStringExtra("fullname");
         email = getIntent().getStringExtra("email");
-        address = getIntent().getStringExtra("wallet");
         id = getIntent().getStringExtra("id");
         name.setText(fullname);
         wallet.setText(address);
