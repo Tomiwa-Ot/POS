@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ResponseListener listener;
     SharedPreferences loginState;
-    private static final String LOGIN_URL = "https://tomiwa.com.ng/btcpos-proj/login";
+    private static final String LOGIN_URL = "https://tomiwa.com.ng/kefa/login";
 
     public interface ResponseListener{
         void gotResponse(JSONObject object);
@@ -55,14 +55,12 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean("isLoggedIn", true);
                     editor.putString("fullname", object.getString("fullname"));
                     editor.putString("email", email.getText().toString());
-                    editor.putString("wallet", object.getString("wallet"));
-                    editor.putString("id", object.getString("id"));
+                    editor.putString("token", object.getString("token"));
                     editor.apply();
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     intent.putExtra("fullname", object.getString("fullname"));
-                    intent.putExtra("email", object.getString("email"));
-                    intent.putExtra("wallet", object.getString("wallet"));
-                    intent.putExtra("id", object.getString("id"));
+                    intent.putExtra("email", email.getText().toString());
+                    intent.putExtra("token", object.getString("token"));
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }catch(JSONException jsonException){
@@ -90,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                                 listener.gotResponse(obj);
                             }else{
                                 progressBar.setVisibility(View.GONE);
-                                Toast.makeText(LoginActivity.this, "Login Failed! Invalid username/password", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Login Failed. Invalid username/password", Toast.LENGTH_LONG).show();
                             }
                         } catch(JSONException e){
                             progressBar.setVisibility(View.GONE);
@@ -110,6 +108,13 @@ public class LoginActivity extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
                     params.put("email", email.getText().toString());
                     params.put("password", passwd.getText().toString());
+                    return params;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("User-Agent","KEFA POS");
                     return params;
                 }
             };
@@ -153,12 +158,10 @@ public class LoginActivity extends AppCompatActivity {
         if(isLoggedIn){
             String fullname = loginState.getString("fullname", null);
             String email = loginState.getString("email", null);
-            String wallet = loginState.getString("wallet", null);
-            String id = loginState.getString("id", null);
+            String token = loginState.getString("token", null);
             intent.putExtra("fullname", fullname);
             intent.putExtra("email", email);
-            intent.putExtra("wallet", wallet);
-            intent.putExtra("id", id);
+            intent.putExtra("token", token);
             startActivity(intent);
         }
     }

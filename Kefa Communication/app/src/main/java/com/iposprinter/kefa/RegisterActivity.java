@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -30,11 +33,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText fullname, email, passwd;
     private Pinview pin;
+    private CheckBox checkBox;
     private ResponseListener listener;
     private ProgressBar progressBar;
     SharedPreferences loginState;
 
-    private static final String REGISTER_URL = "https://tomiwa.com.ng/btcpos-proj/register";
+    private static final String REGISTER_URL = "https://tomiwa.com.ng/kefa/register";
 
     public interface ResponseListener{
         void gotResponse(JSONObject object);
@@ -56,14 +60,16 @@ public class RegisterActivity extends AppCompatActivity {
                     editor.putBoolean("isLoggedIn", true);
                     editor.putString("firstname", fullname.getText().toString());
                     editor.putString("email", email.getText().toString());
-                    editor.putString("address", object.getString("address"));
-                    editor.putString("id", object.getString("id"));
+                    editor.putString("token", object.getString("token"));
                     editor.apply();
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                    intent.putExtra("fullname", fullname.getText().toString());
+                    intent.putExtra("email", email.getText().toString());
+                    intent.putExtra("token", object.getString("token"));
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }catch (JSONException jsonException){
-
+                    jsonException.printStackTrace();
                 }
             }
         };
@@ -71,54 +77,104 @@ public class RegisterActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.edt_email);
         passwd = (EditText) findViewById(R.id.edt_passwd);
         pin = (Pinview) findViewById(R.id.pinview);
+        checkBox = (CheckBox) findViewById(R.id.accept_chkbox);
         progressBar = (ProgressBar) findViewById(R.id.register_progress);
     }
 
     public void register(View view){
-        progressBar.setVisibility(View.VISIBLE);
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest request =  new StringRequest(Request.Method.POST, REGISTER_URL,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try{
-                        JSONObject obj = new JSONObject(response);
-                        if(obj.getString("status").equals("success")){
-                            listener.gotResponse(obj);
-                        }else if(obj.getString("status").equals("account exists")){
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(RegisterActivity.this, "Email is already registered", Toast.LENGTH_SHORT).show();
-                        } else{
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
+        if(validate()){
+            progressBar.setVisibility(View.VISIBLE);
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            StringRequest request =  new StringRequest(Request.Method.POST, REGISTER_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try{
+                                JSONObject obj = new JSONObject(response);
+                                if(obj.getString("status").equals("success")){
+                                    listener.gotResponse(obj);
+                                }else if(obj.getString("status").equals("account exists")){
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(RegisterActivity.this, "Email is already registered", Toast.LENGTH_SHORT).show();
+                                } else{
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
+                                }
+                            } catch(JSONException e){
+                                progressBar.setVisibility(View.GONE);
+                                e.printStackTrace();
+                            }
                         }
-                    } catch(JSONException e){
-                        progressBar.setVisibility(View.GONE);
-                        e.printStackTrace();
-                    }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                 }
-            }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(RegisterActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
+            ){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("fullname", fullname.getText().toString());
+                    params.put("email", email.getText().toString());
+                    params.put("password", passwd.getText().toString());
+                    params.put("pin", pin.getValue());
+                    return params;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("User-Agent", "KEFA POS");
+                    return params;
+                }
+            };
+            requestQueue.add(request);
         }
-        ){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("firstname", fullname.getText().toString());
-                params.put("email", email.getText().toString());
-                params.put("password", passwd.getText().toString());
-                params.put("pin", pin.getValue());
-                return params;
-            }
-        };
-        requestQueue.add(request);
     }
 
-
+    public boolean validate(){
+        boolean fullnameValidate, emailValidate, pwdValidate, pinValidate, checkValidate;
+        TextInputLayout t_name = (TextInputLayout) findViewById(R.id.fullname_input_layout);
+        TextInputLayout t_email = (TextInputLayout) findViewById(R.id.mail_input_layout);
+        TextInputLayout t_passwd = (TextInputLayout) findViewById(R.id.pwd_input_layout);
+        // verify name is 2 words
+        if(!fullname.getText().toString().isEmpty()){
+            fullnameValidate = true;
+            t_name.setError(null);
+        }else{
+            fullnameValidate = false;
+            t_name.setError("This field cannot be empty");
+        }
+        if(!email.getText().toString().isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
+            emailValidate = true;
+            t_email.setError(null);
+        }else{
+            emailValidate = false;
+            t_email.setError("Enter a valid email");
+        }
+        if(!passwd.getText().toString().isEmpty()){
+            pwdValidate = true;
+            t_passwd.setError(null);
+        }else{
+            pwdValidate = false;
+            t_passwd.setError("Password cannot be empty");
+        }
+        if(pin.getValue().length() == 6){
+            pinValidate = true;
+        }else{
+            pinValidate = false;
+            Toast.makeText(RegisterActivity.this, "Enter a 6 digit pin", Toast.LENGTH_SHORT).show();
+        }
+        if(checkBox.isChecked()){
+            checkValidate = true;
+        }else{
+            checkValidate = false;
+            Toast.makeText(RegisterActivity.this, "Agree to terms and conditions", Toast.LENGTH_SHORT).show();
+        }
+        return fullnameValidate && emailValidate && pwdValidate && pinValidate && checkValidate;
+    }
 
 
 }

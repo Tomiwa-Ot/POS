@@ -47,7 +47,7 @@
     <string name="history" translatable="false" tools:ignore="DuplicateDefinition">History</string>
     <string name="qrcode" translatable="false" tools:ignore="DuplicateDefinition">Qr Code</string>
     <string name="settings" translatable="false" tools:ignore="DuplicateDefinition">Settings</string>
-    <string name="print" translatable="false" tools:ignore="DuplicateDefinition">Test Print</string>
+    <string name="print" translatable="false" tools:ignore="DuplicateDefinition">Test Printer</string>
     <string name="email" translatable="false" tools:ignore="DuplicateDefinition">Email</string>
     <string name="fullname" translatable="false" tools:ignore="DuplicateDefinition">Fullname</string>
     <string name="passwd" translatable="false" tools:ignore="DuplicateDefinition">Password</string>

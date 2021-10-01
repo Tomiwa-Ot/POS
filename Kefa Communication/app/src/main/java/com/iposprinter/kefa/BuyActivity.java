@@ -592,8 +592,7 @@ public class BuyActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    mIPosPrinterService.printSpecifiedTypeText("  #1  美团测试\n\n", "ST", 48, callback);
-                    mIPosPrinterService.printSpecifiedTypeText("      粤香港式烧腊(第1联)\n\n", "ST", 24, callback);
+                    mIPosPrinterService.printSpecifiedTypeText("      Kefa Communication\n\n", "ST", 24, callback);
                     mIPosPrinterService.printSpecifiedTypeText("------------------------\n\n*********预订单*********\n", "ST", 32, callback);
                     mIPosPrinterService.printSpecifiedTypeText("  期望送达时间:[18:00]\n\n", "ST", 32, callback);
                     mIPosPrinterService.printSpecifiedTypeText("--------------------------------\n下单时间: " + "01-01 12:00", "ST", 24, callback);
@@ -610,7 +609,6 @@ public class BuyActivity extends AppCompatActivity {
                     mIPosPrinterService.printSpecifiedTypeText("--------------------------------\n", "ST", 24, callback);
                     mIPosPrinterService.printSpecifiedTypeText("张* 18312345678\n地址信息\n", "ST", 48, callback);
                     mIPosPrinterService.printSpecifiedTypeText("--------------------------------\n", "ST", 24, callback);
-                    mIPosPrinterService.printSpecifiedTypeText("  #1  美团测试\n\n\n", "ST", 48, callback);
 
                     mIPosPrinterService.printerPerformPrint(160, callback);
                 } catch (RemoteException e) {

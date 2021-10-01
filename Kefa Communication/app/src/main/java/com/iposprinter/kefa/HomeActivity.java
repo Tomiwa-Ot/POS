@@ -1,7 +1,7 @@
 package com.iposprinter.kefa;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
+//import android.content.ClipData;
+//import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,11 +16,11 @@ import android.widget.Toast;
 public class HomeActivity extends AppCompatActivity {
 
     SharedPreferences loginState;
-    ClipboardManager myClipboard;
-    ClipData myClip;
+//    ClipboardManager myClipboard;
+//    ClipData myClip;
 
-    private TextView wallet, name;
-    private String fullname, email, address, id;
+    private TextView name;
+    private String fullname, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,7 @@ public class HomeActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.txt_name);
         fullname = getIntent().getStringExtra("fullname");
         email = getIntent().getStringExtra("email");
-        id = getIntent().getStringExtra("id");
         name.setText(fullname);
-        wallet.setText(address);
 
         Uri uri = getIntent().getData();
         if(uri != null){
@@ -46,9 +44,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void copy(View view){
-        myClipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
-        myClip = ClipData.newPlainText("text", address);
-        myClipboard.setPrimaryClip(myClip);
+//        myClipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+//        myClip = ClipData.newPlainText("text", address);
+//        myClipboard.setPrimaryClip(myClip);
         Toast.makeText(getApplicationContext(),"Wallet Address Copied",Toast.LENGTH_SHORT).show();
     }
 
@@ -58,26 +56,23 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    public void send(View view){
-        Intent intent = new Intent(this, SendActivity.class);
-        startActivity(intent);
-    }
+//    public void send(View view){
+//        Intent intent = new Intent(this, SendActivity.class);
+//        startActivity(intent);
+//    }
 
-    public void receive(View view){
-        Intent intent = new Intent(this, ReceiveActivity.class);
-        intent.putExtra("fullname", fullname);
-        intent.putExtra("address", address);
-        startActivity(intent);
-    }
-
-    public void pay(View view){
-        Intent intent = new Intent(this, PayActivity.class);
-        intent.putExtra("fullname", fullname);
-        intent.putExtra("email", email);
-        intent.putExtra("address", address);
-        intent.putExtra("id", id);
-        startActivity(intent);
-    }
+//    public void receive(View view){
+//        Intent intent = new Intent(this, ReceiveActivity.class);
+//        intent.putExtra("fullname", fullname);
+//        startActivity(intent);
+//    }
+//
+//    public void pay(View view){
+//        Intent intent = new Intent(this, PayActivity.class);
+//        intent.putExtra("fullname", fullname);
+//        intent.putExtra("email", email);
+//        startActivity(intent);
+//    }
 
     public void history(View view){
         Intent intent = new Intent(this, HistoryActivity.class);

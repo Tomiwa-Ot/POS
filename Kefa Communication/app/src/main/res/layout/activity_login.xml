@@ -90,6 +90,12 @@
             android:backgroundTint="#3897f0"
             android:background="@drawable/rounded_button"/>
 
+        <ProgressBar
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_progress" />
+
         <!-- Text view displaying the text
                 "Forgot your login details?"-->
         <TextView
@@ -152,11 +158,7 @@
             android:text="Don't have an account? Sign Up"
             android:textSize="15sp"/>
 
-        <ProgressBar
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/login_progress" />
+
 
     </LinearLayout>
 
