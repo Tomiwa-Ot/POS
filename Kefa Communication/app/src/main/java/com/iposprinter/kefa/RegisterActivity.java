@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText firstname, lastname, email, passwd;
+    private EditText fullname, email, passwd;
     private Pinview pin;
     private ResponseListener listener;
     private ProgressBar progressBar;
@@ -54,8 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
                     loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = loginState.edit();
                     editor.putBoolean("isLoggedIn", true);
-                    editor.putString("firstname", firstname.getText().toString());
-                    editor.putString("lastname", lastname.getText().toString());
+                    editor.putString("firstname", fullname.getText().toString());
                     editor.putString("email", email.getText().toString());
                     editor.putString("address", object.getString("address"));
                     editor.putString("id", object.getString("id"));
@@ -68,8 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         };
-        firstname = (EditText) findViewById(R.id.edt_firstname);
-        lastname = (EditText) findViewById(R.id.edt_lastname);
+        fullname = (EditText) findViewById(R.id.edt_fullname);
         email = (EditText) findViewById(R.id.edt_email);
         passwd = (EditText) findViewById(R.id.edt_passwd);
         pin = (Pinview) findViewById(R.id.pinview);
@@ -110,8 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("firstname", firstname.getText().toString());
-                params.put("lastname", lastname.getText().toString());
+                params.put("firstname", fullname.getText().toString());
                 params.put("email", email.getText().toString());
                 params.put("password", passwd.getText().toString());
                 params.put("pin", pin.getValue());

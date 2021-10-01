@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         wallet = (TextView) findViewById(R.id.txt_wallet);
         name = (TextView) findViewById(R.id.txt_name);
-        fullname = getIntent().getStringExtra("lastname") + " " + getIntent().getStringExtra("firstname");
+        fullname = getIntent().getStringExtra("fullname");
         email = getIntent().getStringExtra("email");
         address = getIntent().getStringExtra("wallet");
         id = getIntent().getStringExtra("id");
@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Uri uri = getIntent().getData();
         if(uri != null){
-//            fullname = loginState.getString("lastname", null) + " " + loginState.getString("firstname", null);
+//            fullname = loginState.getString("fullname", null);
 //            email = loginState.getString("email", null);
 //            address = loginState.getString("wallet", null);
 //            id = loginState.getString("id", null);

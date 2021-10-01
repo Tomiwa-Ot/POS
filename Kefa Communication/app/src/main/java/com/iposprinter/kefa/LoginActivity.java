@@ -53,15 +53,13 @@ public class LoginActivity extends AppCompatActivity {
                     loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = loginState.edit();
                     editor.putBoolean("isLoggedIn", true);
-                    editor.putString("firstname", object.getString("firstname"));
-                    editor.putString("lastname", object.getString("lastname"));
+                    editor.putString("fullname", object.getString("fullname"));
                     editor.putString("email", email.getText().toString());
                     editor.putString("wallet", object.getString("wallet"));
                     editor.putString("id", object.getString("id"));
                     editor.apply();
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    intent.putExtra("firstname", object.getString("firstname"));
-                    intent.putExtra("lastname", object.getString("lastname"));
+                    intent.putExtra("fullname", object.getString("fullname"));
                     intent.putExtra("email", object.getString("email"));
                     intent.putExtra("wallet", object.getString("wallet"));
                     intent.putExtra("id", object.getString("id"));
@@ -153,13 +151,11 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         if(isLoggedIn){
-            String firstname = loginState.getString("firstname", null);
-            String lastname = loginState.getString("lastname", null);
+            String fullname = loginState.getString("fullname", null);
             String email = loginState.getString("email", null);
             String wallet = loginState.getString("wallet", null);
             String id = loginState.getString("id", null);
-            intent.putExtra("firstname", firstname);
-            intent.putExtra("lastname", lastname);
+            intent.putExtra("fullname", fullname);
             intent.putExtra("email", email);
             intent.putExtra("wallet", wallet);
             intent.putExtra("id", id);

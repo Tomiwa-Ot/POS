@@ -1,206 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Relative layout as parent layout-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/purple"
-    android:gravity="center"
+    android:background="@color/white"
     tools:context=".RegisterActivity">
 
-    <android.support.v7.widget.CardView
+
+
+    <!-- Linear layout to contain all the
+        editText, password , logo and button-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="40dp"
-        app:cardCornerRadius="10dp"
-        android:background="@color/white"
-        app:cardElevation="5dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingStart="28dp"
+        android:paddingEnd="28dp"
+        android:layout_centerInParent="true">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
-
-            <LinearLayout
-                android:id="@+id/name_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:gravity="center"
-                android:layout_marginLeft="10dp"
-                android:orientation="horizontal">
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/firstname_input_layout"
-                    android:layout_width="190dp"
-                    android:layout_height="wrap_content"
-                    app:errorEnabled="true">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/edt_firstname"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:hint="@string/fname"
-                        android:inputType="textEmailAddress"
-                        android:maxLines="1"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="20dp"
-                        android:singleLine="true"/>
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/lastname_input_layout"
-                    android:layout_width="190dp"
-                    android:layout_height="wrap_content"
-                    app:errorEnabled="true">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/edt_lastname"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:hint="@string/lname"
-                        android:inputType="textEmailAddress"
-                        android:maxLines="1"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="20dp"
-                        android:singleLine="true"/>
-
-                </android.support.design.widget.TextInputLayout>
-
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/fullname_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical">
+            app:errorEnabled="true">
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/email_input_layout"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edt_fullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true">
+                android:textSize="14sp"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:layout_marginTop="22dp"
+                android:hint="@string/fullname"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:background="@drawable/background_edit_text" />
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/edt_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:hint="@string/email"
-                    android:inputType="textEmailAddress"
-                    android:drawableStart="@drawable/icoemail"
-                    android:maxLines="1"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="20dp" />
-
-            </android.support.design.widget.TextInputLayout>
+        </android.support.design.widget.TextInputLayout>
 
 
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/email_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/passwd_input_layout"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:errorEnabled="true"
-                app:passwordToggleEnabled="true">
+                android:textSize="14sp"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:layout_marginTop="22dp"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:background="@drawable/background_edit_text" />
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/edt_passwd"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:hint="@string/passwd"
-                    android:inputType="textPassword"
-                    android:drawableStart="@drawable/icolock"
-                    android:maxLines="1"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp" />
+        </android.support.design.widget.TextInputLayout>
 
-            </android.support.design.widget.TextInputLayout>
+        <!-- Edit text provided to write
+            password (according to instagram UI)-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/passwd_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true">
 
-
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="30dp"
-                android:text="Enter a 6 digit pin"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:textSize="16sp"/>
-
-            <com.goodiebag.pinview.Pinview
-                android:id="@+id/pinview"
-                app:pinBackground="@drawable/bg_register_pin"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edt_passwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:pinWidth="40dp"
-                app:pinHeight="40dp"
-                app:pinLength="6"
-                app:hint="*"
-                app:cursorVisible="false"
-                app:forceKeyboard="true"
-                app:inputType="number"
-                app:password="true"/>
+                android:textSize="14sp"
+                android:padding="12dp"
+                android:singleLine="true"
+                android:layout_marginTop="16dp"
+                android:hint="@string/passwd"
+                android:inputType="textPassword"
+                android:background="@drawable/background_edit_text"
+                android:maxLines="1" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter a 6 digit pin"
+            android:textSize="14sp"/>
+
+        <com.goodiebag.pinview.Pinview
+            android:id="@+id/pinview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:pinWidth="25dp"
+            app:pinHeight="25dp"
+            app:pinLength="6"
+            app:hint="*"
+            app:cursorVisible="false"
+            app:forceKeyboard="true"
+            app:inputType="number"
+            app:password="true"/>
+
+        <CheckBox
+            android:id="@+id/accept_chkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/darkgrey"
+            android:layout_marginTop="15dp"
+            android:text="@string/terms" />
+
+        <!-- material button is used to display the "Login" button to user-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:padding="12dp"
+            android:onClick="register"
+            android:backgroundTint="#3897f0"
+            android:background="@drawable/rounded_button"/>
 
 
 
-            <CheckBox
-                android:id="@+id/accept_chkbox"
-                android:layout_width="match_parent"
-                android:layout_marginBottom="30dp"
-                android:textColor="@color/darkgrey"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:buttonTint="@color/colorAccent"
-                android:text="Agree to our Terms &amp; Conditions"
-                android:layout_height="match_parent"/>
 
-            <Button
-                android:id="@+id/regsiter_btn"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/rounded_button"
-                android:onClick="register"
-                android:text="@string/register"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+        <ProgressBar
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_progress" />
 
-            <ProgressBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/register_progress"
-                android:visibility="gone"/>
+    </LinearLayout>
 
 
-        </LinearLayout>
 
 
-    </android.support.v7.widget.CardView>
 
 </RelativeLayout>
