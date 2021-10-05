@@ -24,11 +24,11 @@
 
         <!-- Imageview displaying the logo
                 or name of the application-->
-<!--        <ImageView-->
-<!--            android:layout_width="147dp"-->
-<!--            android:layout_height="82dp"-->
-<!--            android:adjustViewBounds="true"-->
-<!--            android:src="@drawable/logo" />-->
+        <ImageView
+            android:layout_width="147dp"
+            android:layout_height="82dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/kefa_logo" />
 
         <!-- Edit text provided to user to
             enter email, username or phone no.-->
