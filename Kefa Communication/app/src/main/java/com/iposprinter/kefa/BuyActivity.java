@@ -591,6 +591,7 @@ public class BuyActivity extends AppCompatActivity {
 
             @Override
             public void run() {
+                Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.kefa_logo);
                 try {
                     mIPosPrinterService.printSpecifiedTypeText("      Kefa Communication\n\n", "ST", 24, callback);
                     mIPosPrinterService.printSpecifiedTypeText("------------------------\n\n*********预订单*********\n", "ST", 32, callback);
