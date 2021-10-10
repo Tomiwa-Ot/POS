@@ -19,7 +19,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginRight="30dp"
         android:onClick="copy"
-        app:cardBackgroundColor="@color/purple"
+        app:cardBackgroundColor="@color/blue"
         app:cardCornerRadius="10dp"
         app:cardElevation="15dp">
 
@@ -37,7 +37,7 @@
                 android:layout_marginBottom="60dp"
                 android:gravity="center"
                 android:text="0.010543 BTC"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -74,10 +74,10 @@
         <TextView
             android:layout_width="350dp"
             android:layout_height="40dp"
-            android:text="@string/copyAddress"
+            android:text=""
+            android:textAlignment="center"
             android:textColor="@color/purple"
-            android:textSize="15sp"
-            android:textAlignment="center"/>
+            android:textSize="15sp" />
 
     </RelativeLayout>
 
@@ -85,86 +85,98 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/rounded_container"
         android:layout_below="@+id/tap_to_copy"
-        android:paddingLeft="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="15dp"
+        android:background="@drawable/rounded_container"
+        android:paddingLeft="20dp"
         android:paddingRight="20dp">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="70dp"
+                android:orientation="horizontal"
                 android:paddingTop="1dp">
 
 
+                <Button
+                    android:id="@+id/buy_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:onClick="buy"
+                    android:textColor="@color/blue"
+                    android:layout_gravity="center"
+                    android:gravity="center|bottom"
+                    android:text="@string/buy"
+                    android:textAllCaps="false" />
 
-                    <Button
-                        android:id="@+id/buy_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="buy"
-                        android:textAllCaps="false"
-                        android:text="@string/buy" />
+                <!--                    <Button-->
+                <!--                        android:id="@+id/send_btn"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:onClick="send"-->
+                <!--                        android:textAllCaps="false"-->
+                <!--                        android:text="@string/send" />-->
 
-<!--                    <Button-->
-<!--                        android:id="@+id/send_btn"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:onClick="send"-->
-<!--                        android:textAllCaps="false"-->
-<!--                        android:text="@string/send" />-->
-
-<!--                    <Button-->
-<!--                        android:id="@+id/receive_btn"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:onClick="receive"-->
-<!--                        android:textAllCaps="false"-->
-<!--                        android:text="@string/receive" />-->
-
-
-<!--                <Button-->
-<!--                    android:id="@+id/withdraw_btn"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:onClick="pay"-->
-<!--                    android:textAllCaps="false"-->
-<!--                    android:text="@string/pay" />-->
+                <!--                    <Button-->
+                <!--                        android:id="@+id/receive_btn"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:onClick="receive"-->
+                <!--                        android:textAllCaps="false"-->
+                <!--                        android:text="@string/receive" />-->
 
 
-                    <Button
-                        android:id="@+id/history_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="history"
-                        android:textAllCaps="false"
-                        android:text="@string/history" />
-
+                <!--                <Button-->
+                <!--                    android:id="@+id/withdraw_btn"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:onClick="pay"-->
+                <!--                    android:textAllCaps="false"-->
+                <!--                    android:text="@string/pay" />-->
 
 
                 <Button
-                        android:id="@+id/logout_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="logout"
-                        android:textAllCaps="false"
-                        android:text="@string/logout" />
+                    android:id="@+id/history_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:onClick="history"
+                    android:textColor="@color/blue"
+                    android:layout_gravity="center"
+                    android:gravity="center|bottom"
+                    android:text="@string/history"
+                    android:textAllCaps="false" />
 
-                    <Button
-                        android:id="@+id/printer_test_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:onClick="testPrint"
-                        android:textAllCaps="false"
-                        android:text="@string/print" />
+
+                <Button
+                    android:id="@+id/logout_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:elevation="40dp"
+                    android:onClick="logout"
+                    android:textColor="@color/blue"
+                    android:layout_gravity="center"
+                    android:gravity="center|bottom"
+                    android:text="@string/logout"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/printer_test_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:elevation="40dp"
+                    android:onClick="testPrint"
+                    android:textColor="@color/blue"
+                    android:layout_gravity="center"
+                    android:gravity="center|bottom"
+                    android:text="@string/print"
+                    android:textAllCaps="false" />
 
 
             </LinearLayout>

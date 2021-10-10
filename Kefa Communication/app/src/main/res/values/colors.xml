@@ -12,5 +12,6 @@
     <color name="gainsboro">#FAFAFA</color>
     <color name="bluegrey">#28384A</color>
     <color name="blue">#3897f0</color>
+    <color name="greenshade">#00FA9A</color>
     <color name="textcardColor">#3f3f3f</color>
 </resources>
