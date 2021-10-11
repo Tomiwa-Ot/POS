@@ -64,5 +64,6 @@
     <string name="pay" translatable="false" tools:ignore="DuplicateDefinition">Pay</string>
     <string name="withdraw" translatable="false" tools:ignore="DuplicateDefinition">Withdraw</string>
     <string name="forgot" translatable="false" tools:ignore="DuplicateDefinition"><font color='c4c4c4'>Forgot your login details? </font><b>Get help logging in.</b></string>
-    <string name="terms" translatable="false" tools:ignore="DuplicateDefinition"><font color='c4c4c4'>Agree to our </font><b>Terms &amp; Conditions</b></string>
+    <string name="terms" translatable="false" tools:ignore="DuplicateDefinition"><font color='c4c4c4'>Agree to our </font></string>
+    <string name="agree" translatable="false" tools:ignore="DuplicateDefinition"><b>Terms &amp; Conditions</b></string>
 </resources>

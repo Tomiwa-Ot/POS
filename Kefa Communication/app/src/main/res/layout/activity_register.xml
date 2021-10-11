@@ -117,15 +117,35 @@
             app:inputType="number"
             app:password="true"/>
 
-        <CheckBox
-            android:id="@+id/accept_chkbox"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/darkgrey"
-            android:layout_marginTop="15dp"
-            android:text="@string/terms" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
 
+            <CheckBox
+                android:id="@+id/accept_chkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/darkgrey"
+                android:layout_marginTop="15dp"
+                android:text="@string/terms" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="6dp"
+                android:elevation="0dp"
+                android:text="@string/agree"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:shadowColor="@color/white"
+                android:onClick="showTerms"
+                android:background="@color/white"/>
+
+
+        </LinearLayout>
         <!-- material button is used to display the "Login" button to user-->
         <Button
             android:layout_width="match_parent"

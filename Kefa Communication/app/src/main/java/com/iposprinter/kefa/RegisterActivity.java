@@ -1,16 +1,23 @@
 package com.iposprinter.kefa;
 
+import static com.iposprinter.kefa.TermsConditions.Terms;
+
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -39,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
     SharedPreferences loginState;
 
     private static final String REGISTER_URL = "https://tomiwa.com.ng/kefa/register";
+
 
     public interface ResponseListener{
         void gotResponse(JSONObject object);
@@ -171,9 +179,26 @@ public class RegisterActivity extends AppCompatActivity {
             checkValidate = true;
         }else{
             checkValidate = false;
-            Toast.makeText(RegisterActivity.this, "Agree to terms and conditions", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Agree to Terms and Conditions", Toast.LENGTH_SHORT).show();
         }
         return fullnameValidate && emailValidate && pwdValidate && pinValidate && checkValidate;
+    }
+
+    public void showTerms(View view){
+        AlertDialog alertDialog = new AlertDialog.Builder(RegisterActivity.this).create();
+        alertDialog.setTitle("Terms & Conditions");
+        alertDialog.setMessage(Terms);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.show();
+//        final Button okBtn = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+//        LinearLayout.LayoutParams okBtnLL = (LinearLayout.LayoutParams) okBtn.getLayoutParams();
+//        okBtnLL.gravity = Gravity.CENTER;
+//        okBtn.setLayoutParams(okBtnLL);
     }
 
 
