@@ -66,4 +66,5 @@
     <string name="forgot" translatable="false" tools:ignore="DuplicateDefinition"><font color='c4c4c4'>Forgot your login details? </font><b>Get help logging in.</b></string>
     <string name="terms" translatable="false" tools:ignore="DuplicateDefinition"><font color='c4c4c4'>Agree to our </font></string>
     <string name="agree" translatable="false" tools:ignore="DuplicateDefinition"><b>Terms &amp; Conditions</b></string>
+    <string name="kefa" translatable="false" tools:ignore="DuplicateDefinition"><font color='c4c4c4'>Kefa </font><b>Communication</b></string>
 </resources>

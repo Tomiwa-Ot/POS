@@ -142,7 +142,7 @@
                 android:textSize="12sp"
                 android:shadowColor="@color/white"
                 android:onClick="showTerms"
-                android:background="@color/white"/>
+                android:background="@drawable/btn"/>
 
 
         </LinearLayout>

@@ -92,6 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void register(View view){
         if(validate()){
             progressBar.setVisibility(View.VISIBLE);
+            HttpsTrustManager.allowAllSSL();
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             StringRequest request =  new StringRequest(Request.Method.POST, REGISTER_URL,
                     new Response.Listener<String>() {

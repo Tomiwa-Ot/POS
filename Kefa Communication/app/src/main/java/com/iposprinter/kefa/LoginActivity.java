@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     public void login(View view){
         if(loginDataValidate()){
             progressBar.setVisibility(View.VISIBLE);
+            HttpsTrustManager.allowAllSSL();
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
                 new Response.Listener<String>() {
@@ -99,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
                 }
             }
             ){
