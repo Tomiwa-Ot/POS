@@ -132,17 +132,16 @@
                 android:layout_marginTop="15dp"
                 android:text="@string/terms" />
 
-            <Button
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="6dp"
-                android:elevation="0dp"
+                android:layout_marginTop="17dp"
                 android:text="@string/agree"
                 android:textColor="@color/black"
                 android:textSize="12sp"
-                android:shadowColor="@color/white"
                 android:onClick="showTerms"
-                android:background="@drawable/btn"/>
+                android:clickable="true"
+                android:background="@color/white"/>
 
 
         </LinearLayout>

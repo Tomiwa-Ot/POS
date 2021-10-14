@@ -52,9 +52,7 @@ public class BuyActivity extends AppCompatActivity {
     private Pinview pin;
     private ProgressBar progressBar;
 
-    private static final String VALIDATE_ADDRESS = "https://tomiwa.com.ng/btcpos-proj/validate_address";
-    private static final String SEND_URL = "https://tomiwa.com.ng/btcpos-proj/send";
-    private static final String BUY_URL = "https://tomiwa.com.ng/btcpos-proj/buy";
+
 
     private static final int CARD_NUMBER_TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
     private static final int CARD_NUMBER_TOTAL_DIGITS = 16; // max numbers of digits in pattern: 0000 x 4
@@ -440,94 +438,8 @@ public class BuyActivity extends AppCompatActivity {
     };
 
 
-//    public boolean verifyInput(){
-//        return false;
-//    }
-//
-    public void pay(){
-//        new StringRequest(Request.Method.POST, BUY_URL,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try{
-//                            JSONObject obj = new JSONObject(response);
-//                            if(obj.getString("status").equals("success")){
-//                                verifyTransaction();
-//                            }else if(obj.getString("status").equals("invalid pin")){
-//                                progressBar.setVisibility(View.INVISIBLE);
-//                                Toast.makeText(BuyActivity.this, "INVALID PIN", Toast.LENGTH_LONG).show();
-//                            }else{
-//                                progressBar.setVisibility(View.INVISIBLE);
-//                                Toast.makeText(BuyActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
-//                            }
-//                        }catch (JSONException exception){
-//
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        }
-//        ){
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("email", walletAddress.getText().toString());
-//                params.put("name", name.getText().toString());
-//                params.put("amount", amountBTC.getText().toString());
-//                return params;
-//            }
-//        };
-    }
-
-    public void sendBTC(){
-
-    }
-
-    public void verifyTransaction(){
-
-    }
-
-    public void verifyAddress(){
-        progressBar.setVisibility(View.VISIBLE);
-        new StringRequest(Request.Method.POST, VALIDATE_ADDRESS,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject obj = new JSONObject(response);
-                            if(obj.getBoolean("status")){
-                                pay();
-                            }else{
-                                progressBar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(BuyActivity.this, "Invalid BTC address", Toast.LENGTH_LONG).show();
-                            }
-                        }catch (JSONException exception){
-                            progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(BuyActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }
-        ){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("address", walletAddress.getText().toString());
-                return params;
-            }
-        };
-    }
 
     public void onClick(View v){
-        // check if wallet balance
-
         if (getPrinterStatus() == PRINTER_NORMAL)
             printReceipt();
     }
