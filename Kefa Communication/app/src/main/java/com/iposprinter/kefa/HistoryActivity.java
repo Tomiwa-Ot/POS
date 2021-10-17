@@ -1,5 +1,8 @@
 package com.iposprinter.kefa;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +18,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -24,6 +29,11 @@ public class HistoryActivity extends AppCompatActivity {
     private RequestQueue mQueue;
     private ArrayList<Double> amountList;
     private ArrayList<String> nameList, dateList;
+    private ResponseListener listener;
+
+    public interface ResponseListener{
+        void gotResponse(JSONArray obj);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +43,12 @@ public class HistoryActivity extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.history_list_view);
         mQueue = Volley.newRequestQueue(this);
         fetchJsonResponse();
+        listener = new ResponseListener() {
+            @Override
+            public void gotResponse(JSONArray obj) {
+
+            }
+        };
 
     }
 
@@ -47,18 +63,7 @@ public class HistoryActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         Toast.makeText(HistoryActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
-//                        try {
-//                            for(int i = 0; i < response.length(); i ++){
-//                                JSONObject historyInfo = response.getJSONObject(i);
-//                                //amountList.add(Double.parseDouble(historyInfo.getString("amount")));
-//                                nameList.add(historyInfo.getString("Id"));
-//                                dateList.add(historyInfo.getString("Password"));
-//                            }
-//                            HistoryListViewAdapter historyListViewAdapter = new HistoryListViewAdapter(getApplicationContext(), nameList, dateList);
-//                            lv.setAdapter(historyListViewAdapter);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
+                        listener.gotResponse(response);
                     }
                 }, new Response.ErrorListener() {
             @Override

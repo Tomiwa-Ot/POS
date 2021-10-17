@@ -4,18 +4,21 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/background_edit_text.xml" value="0.2546875" />
+        <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/bg_buy_edittext.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/bg_register_pin.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/bg_scan_btn.xml" value="0.1453125" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/btn.xml" value="0.1421875" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/card1.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/custom_rectangle.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/home_buttons.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/ic_baseline_history_24.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/ic_baseline_print_24.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/ic_bg_topheader.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/rounded_button.xml" value="0.1453125" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/drawable/rounded_container.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/layout/activity_buy.xml" value="0.264" />
-        <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/layout/activity_history_list.xml" value="0.1265625" />
+        <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/layout/activity_history.xml" value="0.20652173913043478" />
+        <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/layout/activity_history_list.xml" value="0.264" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/layout/activity_ipos_printer_test_demo.xml" value="0.1296875" />
         <entry key="..\:/Users/ENVY 15/Desktop/btc_pos/POS/Kefa Communication/app/src/main/res/layout/activity_login.xml" value="0.264" />
