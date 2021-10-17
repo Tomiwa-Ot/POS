@@ -49,9 +49,6 @@
             android:parentActivityName="com.iposprinter.kefa.HomeActivity" />
 
         <activity
-            android:name="com.iposprinter.kefa.SendActivity"
-            android:parentActivityName="com.iposprinter.kefa.HomeActivity" />
-        <activity
             android:name="com.iposprinter.kefa.BuyActivity"
             android:parentActivityName="com.iposprinter.kefa.HomeActivity" />
         <activity
