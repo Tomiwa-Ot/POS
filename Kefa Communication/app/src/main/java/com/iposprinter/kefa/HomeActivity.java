@@ -3,22 +3,16 @@ package com.iposprinter.kefa;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
 
     SharedPreferences loginState;
-
-    private TextView name;
-    private String fullname, email;
-    private LinearLayout buyPage, historyLL, testPrinter, logoutLL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +20,14 @@ public class HomeActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_home);
-        name = (TextView) findViewById(R.id.txt_name);
-        fullname = getIntent().getStringExtra("fullname");
-        email = getIntent().getStringExtra("email");
+        TextView name = (TextView) findViewById(R.id.txt_name);
+        String fullname = getIntent().getStringExtra("fullname");
+        // String email = getIntent().getStringExtra("email");
         name.setText(fullname);
-        testPrinter = (LinearLayout) findViewById(R.id.test_printer);
-        logoutLL = (LinearLayout) findViewById(R.id.logout_ll);
-        historyLL = (LinearLayout) findViewById(R.id.history_ll);
-        buyPage = (LinearLayout) findViewById(R.id.buy_screen);
+        LinearLayout testPrinter = (LinearLayout) findViewById(R.id.test_printer);
+        LinearLayout logoutLL = (LinearLayout) findViewById(R.id.logout_ll);
+        LinearLayout historyLL = (LinearLayout) findViewById(R.id.history_ll);
+        LinearLayout buyPage = (LinearLayout) findViewById(R.id.buy_screen);
         buyPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

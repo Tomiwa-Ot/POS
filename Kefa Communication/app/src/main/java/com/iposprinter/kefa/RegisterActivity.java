@@ -47,11 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private static final String REGISTER_URL = "https://tomiwa.com.ng/kefa/register";
 
-
-    public interface ResponseListener{
-        void gotResponse(JSONObject object);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

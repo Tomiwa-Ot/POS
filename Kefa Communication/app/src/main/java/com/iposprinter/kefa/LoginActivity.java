@@ -35,10 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences loginState;
     private static final String LOGIN_URL = "https://tomiwa.com.ng/kefa/login";
 
-    public interface ResponseListener{
-        void gotResponse(JSONObject object);
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
