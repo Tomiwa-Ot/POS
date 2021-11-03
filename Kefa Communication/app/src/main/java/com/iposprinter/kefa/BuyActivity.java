@@ -120,17 +120,17 @@ public class BuyActivity extends AppCompatActivity {
     private IPosPrinterCallback callback = null;
     private HandlerUtils.MyHandler handler;
 
-    @OnTextChanged(value = R.id.amount_naira, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    protected void onAmountNairaTextChanged(Editable s){
-        try{
-            double nairaAmount = Double.parseDouble(amountNaira.getText().toString());
-            double btc = nairaAmount * 0.00021221;
-            amountBTC.setText(Double.toString(btc));
-        }catch (Exception exception){
-
-        }
-
-    }
+//    @OnTextChanged(value = R.id.amount_naira, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+//    protected void onAmountNairaTextChanged(Editable s){
+//        try{
+//            double nairaAmount = Double.parseDouble(amountNaira.getText().toString());
+//            double btc = nairaAmount * 0.00021221;
+//            amountBTC.setText(Double.toString(btc));
+//        }catch (Exception exception){
+//
+//        }
+//
+//    }
 
 //    @OnTextChanged(value = R.id.amount_btc, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
 //    protected void onAmountBTCTextChanged(Editable s){
@@ -207,14 +207,16 @@ public class BuyActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            walletAddress.setText(data.getStringExtra("qrCodeValue"));
+        if(requestCode == 1){
+            if (resultCode == RESULT_OK) {
+                walletAddress.setText(data.getStringExtra("address"));
+            }
         }
     }
 
     public void scanQRCode(View view){
         Intent intent = new Intent(this, ScanQrActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     @Override
@@ -227,10 +229,11 @@ public class BuyActivity extends AppCompatActivity {
         cardDate = (EditText) findViewById(R.id.cardDateEditText);
         cardCVV = (EditText) findViewById(R.id.cardCVCEditText);
         amountNaira = (EditText) findViewById(R.id.amount_naira);
-        amountBTC = (EditText) findViewById(R.id.amount_btc);
+        // amountBTC = (EditText) findViewById(R.id.amount_btc);
         walletAddress = (EditText) findViewById(R.id.wallet_address);
         pin = (Pinview) findViewById(R.id.pinview);
         progressBar = (ProgressBar) findViewById(R.id.buy_progress);
+        closeKeyboard();
         ButterKnife.bind(this);
         handler = new HandlerUtils.MyHandler(iHandlerIntent);
         callback = new IPosPrinterCallback.Stub() {

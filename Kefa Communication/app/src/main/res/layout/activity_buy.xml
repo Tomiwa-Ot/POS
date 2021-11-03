@@ -25,7 +25,7 @@
         <EditText
             android:id="@+id/customerName"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:layout_marginBottom="-0.25dp"
             android:background="@drawable/bg_buy_edittext"
             android:hint="@string/customer"
@@ -69,7 +69,7 @@
             <EditText
                 android:id="@+id/cardDateEditText"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_marginRight="-0.25dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_card_date_edit_text"
@@ -84,7 +84,7 @@
             <EditText
                 android:id="@+id/cardCVCEditText"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="-0.25dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_card_cvc_edit_text"
@@ -118,8 +118,7 @@
             <EditText
                 android:id="@+id/amount_naira"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginRight="5dp"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginBottom="-0.25dp"
                 android:background="@drawable/bg_buy_edittext"
@@ -130,20 +129,20 @@
                 android:textSize="14sp"
                 tools:ignore="LabelFor,NegativeMargin" />
 
-            <EditText
-                android:id="@+id/amount_btc"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:layout_marginBottom="-0.25dp"
-                android:background="@drawable/bg_buy_edittext"
-                android:hint="@string/btc"
-                android:inputType="phone"
-                android:padding="16dp"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                tools:ignore="LabelFor,NegativeMargin" />
+<!--            <EditText-->
+<!--                android:id="@+id/amount_btc"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="45dp"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_marginBottom="-0.25dp"-->
+<!--                android:background="@drawable/bg_buy_edittext"-->
+<!--                android:hint="@string/btc"-->
+<!--                android:inputType="phone"-->
+<!--                android:padding="16dp"-->
+<!--                android:textColor="@android:color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                tools:ignore="LabelFor,NegativeMargin" />-->
 
         </LinearLayout>
 
@@ -155,7 +154,7 @@
             <EditText
                 android:id="@+id/wallet_address"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_weight="1"
                 android:layout_marginBottom="-0.25dp"
                 android:layout_marginTop="10dp"

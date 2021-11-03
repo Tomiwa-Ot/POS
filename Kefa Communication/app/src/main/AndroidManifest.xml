@@ -34,15 +34,8 @@
             android:name="com.iposprinter.kefa.RegisterActivity"
             android:parentActivityName="com.iposprinter.kefa.LoginActivity" />
 
-        <activity android:name="com.iposprinter.kefa.HomeActivity" >
-            <intent-filter>
-                <data android:scheme="kefa"
-                    android:host="home"/>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name="com.iposprinter.kefa.HomeActivity" />
 
         <activity
             android:name="com.iposprinter.kefa.BuyActivity"
