@@ -31,9 +31,7 @@ public class HistoryActivity extends AppCompatActivity {
     private ArrayList<String> nameList, dateList;
     private ResponseListener listener;
 
-    public interface ResponseListener{
-        void gotResponse(JSONArray obj);
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +43,12 @@ public class HistoryActivity extends AppCompatActivity {
         fetchJsonResponse();
         listener = new ResponseListener() {
             @Override
-            public void gotResponse(JSONArray obj) {
+            public void gotResponse(JSONObject object) {
+
+            }
+
+            @Override
+            public void historyResponse(JSONArray obj) {
 
             }
         };
@@ -63,7 +66,7 @@ public class HistoryActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         Toast.makeText(HistoryActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
-                        listener.gotResponse(response);
+                        listener.historyResponse(response);
                     }
                 }, new Response.ErrorListener() {
             @Override

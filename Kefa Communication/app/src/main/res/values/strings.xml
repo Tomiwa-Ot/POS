@@ -38,6 +38,8 @@
     <string name="unknown_error">unknown status</string>
     <string name="switch_mode">Switch Mode</string>
     <string name="exit">Exit</string>
+
+
     <string name="login" translatable="false" tools:ignore="DuplicateDefinition">Sign In</string>
     <string name="register" translatable="false" tools:ignore="DuplicateDefinition">Sign Up</string>
     <string name="logout" translatable="false" tools:ignore="DuplicateDefinition">Sign Out</string>

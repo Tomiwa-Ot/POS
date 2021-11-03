@@ -1,5 +1,6 @@
 package com.iposprinter.kefa;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -8,12 +9,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -33,6 +36,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.goodiebag.pinview.Pinview;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.iposprinter.iposprinterservice.IPosPrinterCallback;
 import com.iposprinter.iposprinterservice.IPosPrinterService;
 import com.iposprinter.kefa.Utils.HandlerUtils;
@@ -52,6 +57,7 @@ public class BuyActivity extends AppCompatActivity {
     private Pinview pin;
     private ProgressBar progressBar;
 
+    private static final int REQUEST_CAMERA_PERMISSION = 201;
 
 
     private static final int CARD_NUMBER_TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
@@ -206,17 +212,27 @@ public class BuyActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1){
-            if (resultCode == RESULT_OK) {
-                walletAddress.setText(data.getStringExtra("address"));
-            }
-        }
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode == 1){
+//            if (resultCode == RESULT_OK) {
+//                walletAddress.setText(data.getStringExtra("address"));
+//            }
+//        }
     }
 
     public void scanQRCode(View view){
-        Intent intent = new Intent(this, ScanQrActivity.class);
-        startActivityForResult(intent, 1);
+//        if(ActivityCompat.checkSelfPermission(BuyActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
+//            ActivityCompat.requestPermissions(BuyActivity.this, new String[]{
+//                            Manifest.permission.CAMERA
+//                    }, REQUEST_CAMERA_PERMISSION
+//            );
+//        }else{
+//            Intent intent = new Intent(this, ScanQrActivity.class);
+//            startActivityForResult(intent, 1);
+//        }
+//        Intent intent = new Intent(this, ScanQrActivity.class);
+//        startActivityForResult(intent, 1);
+        // zxing scan from intent intentresult && other
     }
 
     @Override

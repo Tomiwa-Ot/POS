@@ -30,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.goodiebag.pinview.Pinview;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -74,6 +75,11 @@ public class RegisterActivity extends AppCompatActivity {
                 }catch (JSONException jsonException){
                     jsonException.printStackTrace();
                 }
+            }
+
+            @Override
+            public void historyResponse(JSONArray obj) {
+
             }
         };
         fullname = (EditText) findViewById(R.id.edt_fullname);

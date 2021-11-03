@@ -6,7 +6,6 @@
     <color name="Red_700">#FFC53929</color>
     <color name="purple">#4B0082</color>
     <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
     <color name="ash">#444444</color>
     <color name="darkgrey">#696969</color>
     <color name="gainsboro">#FAFAFA</color>
@@ -15,4 +14,7 @@
     <color name="greenshade">#00FA9A</color>
     <color name="textcardColor">#3f3f3f</color>
     <color name="navy">#191970</color>
+    <color name="black">#000000</color>
+
+
 </resources>
