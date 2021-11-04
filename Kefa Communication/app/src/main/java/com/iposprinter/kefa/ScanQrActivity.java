@@ -64,12 +64,6 @@ public class ScanQrActivity extends AppCompatActivity {
         if(!barcodeDetector.isOperational()){
             Toast.makeText(getApplicationContext(), "not working", Toast.LENGTH_SHORT).show();
         }
-//        BarcodeScannerOptions options = new BarcodeScannerOptions.Builder()
-//                .setBarcodeFormats(
-//                        com.google.mlkit.vision.barcode.Barcode.FORMAT_QR_CODE,
-//                        com.google.mlkit.vision.barcode.Barcode.FORMAT_CODE_39
-//                ).build();
-//        BarcodeScanner barcodeScanner = BarcodeScanning.getClient(options);
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);

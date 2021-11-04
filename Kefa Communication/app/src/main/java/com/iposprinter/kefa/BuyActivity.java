@@ -36,8 +36,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.goodiebag.pinview.Pinview;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.iposprinter.iposprinterservice.IPosPrinterCallback;
 import com.iposprinter.iposprinterservice.IPosPrinterService;
 import com.iposprinter.kefa.Utils.HandlerUtils;
@@ -212,12 +210,12 @@ public class BuyActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(requestCode == 1){
-//            if (resultCode == RESULT_OK) {
-//                walletAddress.setText(data.getStringExtra("address"));
-//            }
-//        }
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if (resultCode == RESULT_OK) {
+                walletAddress.setText(data.getStringExtra("address"));
+            }
+        }
     }
 
     public void scanQRCode(View view){
@@ -230,8 +228,8 @@ public class BuyActivity extends AppCompatActivity {
 //            Intent intent = new Intent(this, ScanQrActivity.class);
 //            startActivityForResult(intent, 1);
 //        }
-//        Intent intent = new Intent(this, ScanQrActivity.class);
-//        startActivityForResult(intent, 1);
+        Intent intent = new Intent(this, ScanQrActivity.class);
+        startActivityForResult(intent, 1);
         // zxing scan from intent intentresult && other
     }
 
