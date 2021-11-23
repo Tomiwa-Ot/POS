@@ -3,32 +3,25 @@ package com.iposprinter.kefa;
 import static com.iposprinter.kefa.TermsConditions.Terms;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Patterns;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.goodiebag.pinview.Pinview;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +32,7 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText fullname, email, passwd;
+    private EditText fullname, email, phone, passwd;
     private Pinview pin;
     private CheckBox checkBox;
     private ResponseListener listener;
@@ -62,13 +55,15 @@ public class RegisterActivity extends AppCompatActivity {
                     loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = loginState.edit();
                     editor.putBoolean("isLoggedIn", true);
-                    editor.putString("firstname", fullname.getText().toString());
+                    editor.putString("fullname", fullname.getText().toString());
                     editor.putString("email", email.getText().toString());
+                    editor.putString("phone", phone.getText().toString());
                     editor.putString("token", object.getString("token"));
                     editor.apply();
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     intent.putExtra("fullname", fullname.getText().toString());
                     intent.putExtra("email", email.getText().toString());
+                    intent.putExtra("phone", phone.getText().toString());
                     intent.putExtra("token", object.getString("token"));
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
@@ -84,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
         };
         fullname = (EditText) findViewById(R.id.edt_fullname);
         email = (EditText) findViewById(R.id.edt_email);
+        phone = (EditText) findViewById(R.id.edt_phone);
         passwd = (EditText) findViewById(R.id.edt_passwd);
         pin = (Pinview) findViewById(R.id.pinview);
         checkBox = (CheckBox) findViewById(R.id.accept_chkbox);
@@ -96,45 +92,40 @@ public class RegisterActivity extends AppCompatActivity {
             HttpsTrustManager.allowAllSSL();
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             StringRequest request =  new StringRequest(Request.Method.POST, REGISTER_URL,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try{
-                                JSONObject obj = new JSONObject(response);
-                                if(obj.getString("status").equals("success")){
-                                    listener.gotResponse(obj);
-                                }else if(obj.getString("status").equals("account exists")){
-                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(RegisterActivity.this, "Email is already registered", Toast.LENGTH_SHORT).show();
-                                } else{
-                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
-                                }
-                            } catch(JSONException e){
+                    response -> {
+                        try{
+                            JSONObject obj = new JSONObject(response);
+                            if(obj.getString("status").equals("success")){
+                                listener.gotResponse(obj);
+                            }else if(obj.getString("status").equals("account exists")){
                                 progressBar.setVisibility(View.GONE);
-                                e.printStackTrace();
+                                Toast.makeText(RegisterActivity.this, "Email is already registered", Toast.LENGTH_SHORT).show();
+                            } else{
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
                             }
+                        } catch(JSONException e){
+                            progressBar.setVisibility(View.GONE);
+                            e.printStackTrace();
                         }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-                }
-            }
+                    }, error -> {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(RegisterActivity.this, "Oops something went wrong", Toast.LENGTH_SHORT).show();
+                    }
             ){
                 @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
+                protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
                     params.put("fullname", fullname.getText().toString());
                     params.put("email", email.getText().toString());
+                    params.put("phone", phone.getText().toString());
                     params.put("password", passwd.getText().toString());
                     params.put("pin", pin.getValue());
                     return params;
                 }
 
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
                     params.put("User-Agent", "KEFA POS");
                     return params;
@@ -145,9 +136,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean validate(){
-        boolean fullnameValidate, emailValidate, pwdValidate, pinValidate, checkValidate;
+        boolean fullnameValidate, emailValidate, phoneValidate, pwdValidate, pinValidate, checkValidate;
         TextInputLayout t_name = (TextInputLayout) findViewById(R.id.fullname_input_layout);
         TextInputLayout t_email = (TextInputLayout) findViewById(R.id.mail_input_layout);
+        TextInputLayout t_phone = (TextInputLayout) findViewById(R.id.phone_input_layout);
         TextInputLayout t_passwd = (TextInputLayout) findViewById(R.id.pwd_input_layout);
         // verify name is 2 words
         if(!fullname.getText().toString().isEmpty()){
@@ -163,6 +155,13 @@ public class RegisterActivity extends AppCompatActivity {
         }else{
             emailValidate = false;
             t_email.setError("Enter a valid email");
+        }
+        if(!phone.getText().toString().isEmpty() && Patterns.PHONE.matcher(phone.getText().toString()).matches()){
+            phoneValidate = true;
+            t_phone.setError(null);
+        }else{
+            phoneValidate = false;
+            t_phone.setError("Enter a valid phone number");
         }
         if(!passwd.getText().toString().isEmpty()){
             pwdValidate = true;
@@ -183,19 +182,14 @@ public class RegisterActivity extends AppCompatActivity {
             checkValidate = false;
             Toast.makeText(RegisterActivity.this, "Agree to Terms and Conditions", Toast.LENGTH_SHORT).show();
         }
-        return fullnameValidate && emailValidate && pwdValidate && pinValidate && checkValidate;
+        return fullnameValidate && emailValidate && phoneValidate && pwdValidate && pinValidate && checkValidate;
     }
 
     public void showTerms(View view){
         AlertDialog alertDialog = new AlertDialog.Builder(RegisterActivity.this).create();
         alertDialog.setTitle("Terms & Conditions");
         alertDialog.setMessage(Terms);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", (dialog, which) -> dialog.dismiss());
         alertDialog.show();
 //        final Button okBtn = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
 //        LinearLayout.LayoutParams okBtnLL = (LinearLayout.LayoutParams) okBtn.getLayoutParams();

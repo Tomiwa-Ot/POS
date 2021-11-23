@@ -4,8 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
@@ -13,13 +12,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,8 +55,9 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("fullname", object.getString("fullname"));
                     intent.putExtra("email", email.getText().toString());
                     intent.putExtra("token", object.getString("token"));
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+                    LoginActivity.this.finish();
                 }catch(JSONException jsonException){
                     jsonException.printStackTrace();
                 }
@@ -82,9 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             HttpsTrustManager.allowAllSSL();
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+                    response -> {
                         try{
                             JSONObject obj = new JSONObject(response);
                             if(obj.getString("status").equals("success")){
@@ -97,17 +93,13 @@ public class LoginActivity extends AppCompatActivity {
                             progressBar.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
-                    }
-                }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+                    }, error -> {
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Oops something went wrong", Toast.LENGTH_LONG).show();
                 }
-            }
             ){
                 @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
+                protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
                     params.put("email", email.getText().toString());
                     params.put("password", passwd.getText().toString());
@@ -115,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     Map<String, String> params = new HashMap<>();
                     params.put("User-Agent","KEFA POS");
                     return params;
@@ -157,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
         loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
         boolean isLoggedIn = loginState.getBoolean("isLoggedIn", false);
         Intent intent = new Intent(this, HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         if(isLoggedIn){
             String fullname = loginState.getString("fullname", null);
             String email = loginState.getString("email", null);
@@ -166,6 +158,7 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra("email", email);
             intent.putExtra("token", token);
             startActivity(intent);
+            LoginActivity.this.finish();
         }
     }
 

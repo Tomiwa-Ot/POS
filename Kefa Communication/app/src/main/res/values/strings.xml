@@ -39,6 +39,11 @@
     <string name="switch_mode">Switch Mode</string>
     <string name="exit">Exit</string>
 
+    <string name="toggle_on" translatable="false" tools:ignore="DuplicateDefinition">Click here to switch lights</string>
+    <string name="back" translatable="false" tools:ignore="DuplicateDefinition">Switch to rear camera</string>
+    <string name="front" translatable="false" tools:ignore="DuplicateDefinition">Switch to a front camera</string>
+    <string name="toast" translatable="false" tools:ignore="DuplicateDefinition">The bar code or the two-dimensional code is placed in the frame and can be scanned</string>
+
 
     <string name="login" translatable="false" tools:ignore="DuplicateDefinition">Sign In</string>
     <string name="register" translatable="false" tools:ignore="DuplicateDefinition">Sign Up</string>
@@ -51,10 +56,9 @@
     <string name="settings" translatable="false" tools:ignore="DuplicateDefinition">Settings</string>
     <string name="print" translatable="false" tools:ignore="DuplicateDefinition">Test Printer</string>
     <string name="email" translatable="false" tools:ignore="DuplicateDefinition">Email</string>
+    <string name="phone" translatable="false" tools:ignore="DuplicateDefinition">Phone</string>
     <string name="fullname" translatable="false" tools:ignore="DuplicateDefinition">Fullname</string>
     <string name="passwd" translatable="false" tools:ignore="DuplicateDefinition">Password</string>
-    <string name="fname" translatable="false" tools:ignore="DuplicateDefinition">Firstname</string>
-    <string name="lname" translatable="false" tools:ignore="DuplicateDefinition">Lastname</string>
     <string name="walletAddress" translatable="false" tools:ignore="DuplicateDefinition">Wallet Address</string>
     <string name="cardNumber" translatable="false" tools:ignore="DuplicateDefinition">Card Number</string>
     <string name="cardDate" translatable="false" tools:ignore="DuplicateDefinition">MM/YY</string>

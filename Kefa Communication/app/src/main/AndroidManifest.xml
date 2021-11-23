@@ -4,14 +4,17 @@
 
     <uses-feature
         android:name="android.hardware.camera"
+        android:hardwareAccelerated="true"
         android:required="true" />
 
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -19,36 +22,35 @@
         android:icon="@mipmap/kefa_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-
-        <activity android:name="com.iposprinter.kefa.LoginActivity">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.iposprinter.kefa.RegisterActivity"
-            android:parentActivityName="com.iposprinter.kefa.LoginActivity" />
-
+            android:name=".RegisterActivity"
+            android:parentActivityName=".LoginActivity" />
+        <activity android:name=".HomeActivity" />
         <activity
-            android:name="com.iposprinter.kefa.HomeActivity" />
-
+            android:name=".BuyActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity
-            android:name="com.iposprinter.kefa.BuyActivity"
-            android:parentActivityName="com.iposprinter.kefa.HomeActivity" />
+            android:name=".HistoryActivity"
+            android:parentActivityName=".HomeActivity" />
         <activity
-            android:name="com.iposprinter.kefa.HistoryActivity"
-            android:parentActivityName="com.iposprinter.kefa.HomeActivity" />
+            android:name=".IPosPrinterTestDemo"
+            android:parentActivityName=".HomeActivity" />
         <activity
-            android:name="com.iposprinter.kefa.IPosPrinterTestDemo"
-            android:parentActivityName="com.iposprinter.kefa.HomeActivity" />
-        <activity
-            android:name="com.iposprinter.kefa.ScanQrActivity"
-            android:parentActivityName="com.iposprinter.kefa.BuyActivity" />
+            android:name=".ScanQrActivity"
+            android:parentActivityName=".BuyActivity" />
+<!--        <activity-->
+<!--            android:name="com.journeyapps.barcodescanner.CaptureActivity"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            tools:replace="screenOrientation" />-->
 
         <service android:name="com.iposprinter.iposprinterservice.IPosPrintService" />
         <!--
@@ -59,7 +61,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
-            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="barcode" />
     </application>
 

@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".RegisterActivity">
 
 
@@ -31,13 +30,13 @@
             android:src="@mipmap/kefa_logo" />
 
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fullname_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_fullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,40 +49,91 @@
                 android:maxLines="1"
                 android:background="@drawable/background_edit_text" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/mail_input_layout"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:errorEnabled="true">
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/edt_email"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:padding="12dp"
-                android:singleLine="true"
-                android:layout_marginTop="22dp"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:background="@drawable/background_edit_text" />
+                android:orientation="vertical">
 
-        </android.support.design.widget.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/mail_input_layout"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        android:singleLine="true"
+                        android:layout_marginTop="22dp"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:background="@drawable/background_edit_text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:clickable="true">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phone_input_layout"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        android:singleLine="true"
+                        android:layout_marginTop="22dp"
+                        android:hint="@string/phone"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:background="@drawable/background_edit_text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
 
         <!-- Edit text provided to write
             password (according to instagram UI)-->
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/pwd_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:passwordToggleEnabled="true">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_passwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,7 +146,7 @@
                 android:background="@drawable/background_edit_text"
                 android:maxLines="1" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -123,6 +173,7 @@
             android:orientation="horizontal"
             android:gravity="center">
 
+
             <CheckBox
                 android:id="@+id/accept_chkbox"
                 android:layout_width="wrap_content"
@@ -135,7 +186,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="17dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/agree"
                 android:textColor="@color/black"
                 android:textSize="12sp"

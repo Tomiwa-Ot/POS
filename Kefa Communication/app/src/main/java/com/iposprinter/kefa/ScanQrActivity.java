@@ -1,120 +1,137 @@
 package com.iposprinter.kefa;
 
-import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Point;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.media.Image;
 import android.os.Bundle;
-import android.util.SparseArray;
+import android.util.Size;
 import android.view.Display;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.Window;
 import android.widget.Toast;
 
-import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
+import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageAnalysis;
+import androidx.camera.core.ImageCapture;
+import androidx.camera.core.ImageProxy;
+import androidx.camera.core.Preview;
+import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.camera.view.PreviewView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.gms.tasks.Task;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.mlkit.vision.barcode.Barcode;
+import com.google.mlkit.vision.barcode.BarcodeScanner;
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions;
+import com.google.mlkit.vision.barcode.BarcodeScanning;
+import com.google.mlkit.vision.common.InputImage;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
-import java.io.IOException;
+public class ScanQrActivity extends FragmentActivity {
 
-
-public class ScanQrActivity extends AppCompatActivity {
-
-    SurfaceView surfaceView;
-    private CameraSource cameraSource;
-    private static final int REQUEST_CAMERA_PERMISSION = 201;
+    private ListenableFuture cameraProviderFuture;
+    private ExecutorService cameraExecutor;
+    private PreviewView previewView;
+    private String qrResult;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
+        // getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_scan_qr);
-        surfaceView = (SurfaceView) findViewById(R.id.surface_view);
-        if(ActivityCompat.checkSelfPermission(ScanQrActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
-            ActivityCompat.requestPermissions(ScanQrActivity.this, new String[]{
-                            Manifest.permission.CAMERA
-                    }, REQUEST_CAMERA_PERMISSION
-            );
-        }
+        previewView = (PreviewView) findViewById(R.id.preview_view);
+        this.getWindow().setFlags(1024, 1024);
+        cameraExecutor = Executors.newSingleThreadExecutor();
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+        cameraProviderFuture.addListener(() -> {
+            try{
+                ProcessCameraProvider processCameraProvider = (ProcessCameraProvider) cameraProviderFuture.get();
+                bindPreview(processCameraProvider);
+            }catch (ExecutionException | InterruptedException e){
+                e.printStackTrace();
+            }
+        }, ContextCompat.getMainExecutor(this));
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        cameraSource.release();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initialiseDetectorAndSources();
-    }
-
-    private void initialiseDetectorAndSources() {
-        BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(this)
-                .setBarcodeFormats(Barcode.ALL_FORMATS)
-                .build();
-        if(!barcodeDetector.isOperational()){
-            Toast.makeText(getApplicationContext(), "not working", Toast.LENGTH_SHORT).show();
-        }
+    @SuppressLint("RestrictedApi")
+    private void bindPreview(ProcessCameraProvider processCameraProvider) {
+        Preview preview = new Preview.Builder().build();
+        CameraSelector cameraSelector = new CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build();
+        preview.setSurfaceProvider(previewView.getSurfaceProvider());
+        ImageCapture imageCapture = new ImageCapture.Builder().build();
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
         int screenWidth = size.x;
         int screenHeight = size.y;
-        cameraSource = new CameraSource.Builder(this, barcodeDetector)
-                .setRequestedPreviewSize(screenHeight, screenWidth)
-                .setAutoFocusEnabled(true)
+        ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
+                .setTargetResolution(new Size(screenWidth, screenHeight))
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build();
-        surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder holder) {
-                try{
-                    if(ActivityCompat.checkSelfPermission(ScanQrActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
-                        cameraSource.start(surfaceView.getHolder());
-                    }else{
-                        finish();
+        imageAnalysis.setAnalyzer(cameraExecutor, this::scanBarcode);
+        processCameraProvider.unbindAll();
+        processCameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture, imageAnalysis);
+    }
+
+    private void scanBarcode(ImageProxy image){
+        @SuppressLint("UnsafeOptInUsageError") Image image1 = image.getImage();
+        assert image1 != null;
+        InputImage inputImage = InputImage.fromMediaImage(image1, image.getImageInfo().getRotationDegrees());
+        BarcodeScannerOptions options = new BarcodeScannerOptions.Builder()
+                .setBarcodeFormats(
+                        Barcode.FORMAT_QR_CODE,
+                        Barcode.FORMAT_AZTEC
+                ).build();
+        BarcodeScanner scanner = BarcodeScanning.getClient(options);
+        scanner.process(inputImage)
+                .addOnSuccessListener(barcodes -> {
+                    for(Barcode barcode : barcodes){
+                        qrResult = barcode.getRawValue();
+                        // Toast.makeText(getApplicationContext(), barcode.getRawValue(), Toast.LENGTH_SHORT).show();
+                        break;
                     }
-                }catch (IOException e){
-                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-            }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
-                cameraSource.stop();
-            }
-        });
-
-        barcodeDetector.setProcessor(new Detector.Processor<Barcode>(){
-            @Override
-            public void release() {
-//                Toast.makeText(getApplicationContext(), "To prevent memory leaks qr code scanner has stopped", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void receiveDetections(Detector.Detections<Barcode> detections) {
-                final SparseArray<Barcode> barcodes = detections.getDetectedItems();
-                if(barcodes.size() != 0){
+                })
+                .addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show())
+                .addOnCompleteListener(task -> {
+                    image.close();
                     Intent intent = new Intent();
-                    intent.putExtra("address", barcodes.valueAt(0).rawValue);
+                    intent.putExtra("address", qrResult);
                     setResult(RESULT_OK, intent);
                     finish();
-                }
-            }
-        });
+                });
+//        if(result.isSuccessful()){
+//            Intent intent = new Intent();
+//            intent.putExtra("address", qrResult);
+//            setResult(RESULT_OK, intent);
+//            finish();
+//        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+
 }
+

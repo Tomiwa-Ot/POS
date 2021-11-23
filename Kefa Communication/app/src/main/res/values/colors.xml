@@ -11,10 +11,13 @@
     <color name="gainsboro">#FAFAFA</color>
     <color name="bluegrey">#28384A</color>
     <color name="blue">#3897f0</color>
-    <color name="greenshade">#00FA9A</color>
+    <color name="green">#00FA9A</color>
     <color name="textcardColor">#3f3f3f</color>
     <color name="navy">#191970</color>
     <color name="black">#000000</color>
+
+    <color name="light_blue">#ff3FbFF0</color>
+    <color name="half_trans">#80808080</color>
 
 
 </resources>

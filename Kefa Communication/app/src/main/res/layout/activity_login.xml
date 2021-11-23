@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".LoginActivity">
 
 
@@ -32,13 +31,13 @@
 
         <!-- Edit text provided to user to
             enter email, username or phone no.-->
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,18 +50,18 @@
                 android:maxLines="1"
                 android:background="@drawable/background_edit_text" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Edit text provided to write
             password (according to instagram UI)-->
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwd_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
             app:passwordToggleEnabled="true">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_passwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +74,7 @@
                 android:background="@drawable/background_edit_text"
                 android:maxLines="1" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <!-- material button is used to display the "Login" button to user-->

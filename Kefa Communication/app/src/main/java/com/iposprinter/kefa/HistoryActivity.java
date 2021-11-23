@@ -3,7 +3,9 @@ package com.iposprinter.kefa;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -25,11 +27,10 @@ import java.util.ArrayList;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private ListView lv;
     private RequestQueue mQueue;
-    private ArrayList<Double> amountList;
-    private ArrayList<String> nameList, dateList;
     private ResponseListener listener;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ListView listView;
 
 
 
@@ -38,9 +39,15 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         setTitle("History");
-        lv = (ListView) findViewById(R.id.history_list_view);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
+        listView = (ListView) findViewById(R.id.history_list_view);
         mQueue = Volley.newRequestQueue(this);
         fetchJsonResponse();
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+
+        });
+
         listener = new ResponseListener() {
             @Override
             public void gotResponse(JSONObject object) {

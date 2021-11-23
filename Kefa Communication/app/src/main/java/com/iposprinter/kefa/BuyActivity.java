@@ -16,8 +16,9 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -36,6 +37,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.goodiebag.pinview.Pinview;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.iposprinter.iposprinterservice.IPosPrinterCallback;
 import com.iposprinter.iposprinterservice.IPosPrinterService;
 import com.iposprinter.kefa.Utils.HandlerUtils;
@@ -124,28 +127,6 @@ public class BuyActivity extends AppCompatActivity {
     private IPosPrinterCallback callback = null;
     private HandlerUtils.MyHandler handler;
 
-//    @OnTextChanged(value = R.id.amount_naira, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-//    protected void onAmountNairaTextChanged(Editable s){
-//        try{
-//            double nairaAmount = Double.parseDouble(amountNaira.getText().toString());
-//            double btc = nairaAmount * 0.00021221;
-//            amountBTC.setText(Double.toString(btc));
-//        }catch (Exception exception){
-//
-//        }
-//
-//    }
-
-//    @OnTextChanged(value = R.id.amount_btc, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-//    protected void onAmountBTCTextChanged(Editable s){
-//        try{
-//            double btcAmount = Double.parseDouble(amountBTC.getText().toString());
-//            double nairaAmount = btcAmount / 0.00021221;
-//            amountNaira.setText(Double.toString(nairaAmount));
-//        }catch (Exception exception){
-//
-//        }
-//    }
 
     @OnTextChanged(value = R.id.cardNumberEditText, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     protected void onCardNumberTextChanged(Editable s) {
@@ -210,27 +191,25 @@ public class BuyActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1){
             if (resultCode == RESULT_OK) {
                 walletAddress.setText(data.getStringExtra("address"));
             }
+        }else{
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
     public void scanQRCode(View view){
-//        if(ActivityCompat.checkSelfPermission(BuyActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
-//            ActivityCompat.requestPermissions(BuyActivity.this, new String[]{
-//                            Manifest.permission.CAMERA
-//                    }, REQUEST_CAMERA_PERMISSION
-//            );
-//        }else{
-//            Intent intent = new Intent(this, ScanQrActivity.class);
-//            startActivityForResult(intent, 1);
-//        }
-        Intent intent = new Intent(this, ScanQrActivity.class);
-        startActivityForResult(intent, 1);
-        // zxing scan from intent intentresult && other
+        if(ActivityCompat.checkSelfPermission(BuyActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(BuyActivity.this, new String[]{
+                            Manifest.permission.CAMERA
+                    }, REQUEST_CAMERA_PERMISSION
+            );
+        }else{
+            Intent intent = new Intent(this, ScanQrActivity.class);
+            startActivityForResult(intent, 1);
+        }
     }
 
     @Override
@@ -243,7 +222,6 @@ public class BuyActivity extends AppCompatActivity {
         cardDate = (EditText) findViewById(R.id.cardDateEditText);
         cardCVV = (EditText) findViewById(R.id.cardCVCEditText);
         amountNaira = (EditText) findViewById(R.id.amount_naira);
-        // amountBTC = (EditText) findViewById(R.id.amount_btc);
         walletAddress = (EditText) findViewById(R.id.wallet_address);
         pin = (Pinview) findViewById(R.id.pinview);
         progressBar = (ProgressBar) findViewById(R.id.buy_progress);

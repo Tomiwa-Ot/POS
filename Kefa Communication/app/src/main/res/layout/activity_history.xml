@@ -4,23 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".HistoryActivity">
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textSize="20sp"-->
-<!--        android:id="@+id/textView"/>-->
-    <ListView
-        android:id="@+id/history_list_view"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:divider="@color/gainsboro"
-        android:dividerHeight="1dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:id="@+id/refresh">
+
+        <!--    <TextView-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:textSize="20sp"-->
+        <!--        android:id="@+id/textView"/>-->
+        <ListView
+            android:id="@+id/history_list_view"
+            android:layout_width="match_parent"
+            android:divider="@color/gainsboro"
+            android:dividerHeight="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            tools:listitem="@layout/activity_history_list"
+            android:layout_marginRight="10dp" />
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 
 </LinearLayout>
