@@ -49,13 +49,14 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean("isLoggedIn", true);
                     editor.putString("fullname", object.getString("fullname"));
                     editor.putString("email", email.getText().toString());
+                    // editor.putString("phone", object.getString("phone"));
                     editor.putString("token", object.getString("token"));
                     editor.apply();
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     intent.putExtra("fullname", object.getString("fullname"));
                     intent.putExtra("email", email.getText().toString());
+                    // intent.putExtra("phone", object.getString("phone"));
                     intent.putExtra("token", object.getString("token"));
-                    // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     LoginActivity.this.finish();
                 }catch(JSONException jsonException){
@@ -128,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean emailValidate, pwdValidate;
         TextInputLayout t_email = (TextInputLayout) findViewById(R.id.email_input_layout);
         TextInputLayout t_passwd = (TextInputLayout) findViewById(R.id.passwd_input_layout);
+
         if(!email.getText().toString().isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
             emailValidate = true;
             t_email.setError(null);
@@ -135,6 +137,7 @@ public class LoginActivity extends AppCompatActivity {
             emailValidate = false;
             t_email.setError("Enter a valid email");
         }
+
         if(!passwd.getText().toString().isEmpty()){
             pwdValidate = true;
             t_email.setError(null);
@@ -142,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
             pwdValidate = false;
             t_passwd.setError("Password cannot be empty");
         }
+
         return emailValidate && pwdValidate;
     }
 
@@ -149,13 +153,14 @@ public class LoginActivity extends AppCompatActivity {
         loginState = getSharedPreferences("Data", Context.MODE_PRIVATE);
         boolean isLoggedIn = loginState.getBoolean("isLoggedIn", false);
         Intent intent = new Intent(this, HomeActivity.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         if(isLoggedIn){
             String fullname = loginState.getString("fullname", null);
             String email = loginState.getString("email", null);
+            // String phone = loginState.getString("phone", null);
             String token = loginState.getString("token", null);
             intent.putExtra("fullname", fullname);
             intent.putExtra("email", email);
+            // intent.putExtra("phone", phone);
             intent.putExtra("token", token);
             startActivity(intent);
             LoginActivity.this.finish();

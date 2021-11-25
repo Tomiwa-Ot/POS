@@ -77,6 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         };
+
         fullname = (EditText) findViewById(R.id.edt_fullname);
         email = (EditText) findViewById(R.id.edt_email);
         phone = (EditText) findViewById(R.id.edt_phone);

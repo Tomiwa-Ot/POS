@@ -22,6 +22,8 @@ public class HomeActivity extends AppCompatActivity {
         TextView name = (TextView) findViewById(R.id.txt_name);
         String fullname = getIntent().getStringExtra("fullname");
         // String email = getIntent().getStringExtra("email");
+        // String phone = getIntent().getStringExtra("phone");
+        // String token = getIntent().getStringExtra("token");
         name.setText(fullname);
         LinearLayout testPrinter = (LinearLayout) findViewById(R.id.test_printer);
         LinearLayout logoutLL = (LinearLayout) findViewById(R.id.logout_ll);
