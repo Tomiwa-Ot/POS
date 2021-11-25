@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
@@ -135,15 +137,15 @@ public class LoginActivity extends AppCompatActivity {
             t_email.setError(null);
         }else{
             emailValidate = false;
-            t_email.setError("Enter a valid email");
+            t_email.setError("*Enter a valid email");
         }
 
-        if(!passwd.getText().toString().isEmpty()){
+        if(!passwd.getText().toString().isEmpty() && passwd.getText().toString().length() >= 6){
             pwdValidate = true;
             t_email.setError(null);
         }else{
             pwdValidate = false;
-            t_passwd.setError("Password cannot be empty");
+            t_passwd.setError("*Password cannot be empty");
         }
 
         return emailValidate && pwdValidate;
