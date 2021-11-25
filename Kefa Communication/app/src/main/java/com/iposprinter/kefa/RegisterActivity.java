@@ -141,47 +141,53 @@ public class RegisterActivity extends AppCompatActivity {
         TextInputLayout t_email = (TextInputLayout) findViewById(R.id.mail_input_layout);
         TextInputLayout t_phone = (TextInputLayout) findViewById(R.id.phone_input_layout);
         TextInputLayout t_passwd = (TextInputLayout) findViewById(R.id.pwd_input_layout);
-        // verify name is 2 words
-        if(!fullname.getText().toString().isEmpty()){
+
+        if(!fullname.getText().toString().isEmpty() && fullname.getText().toString().matches("[A-Za-z]+\\s[A-Za-z]+")){
             fullnameValidate = true;
             t_name.setError(null);
         }else{
             fullnameValidate = false;
-            t_name.setError("This field cannot be empty");
+            t_name.setError("*Enter your lastname and firstname");
         }
+
         if(!email.getText().toString().isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
             emailValidate = true;
             t_email.setError(null);
         }else{
             emailValidate = false;
-            t_email.setError("Enter a valid email");
+            t_email.setError("*Enter a valid email");
         }
+
         if(!phone.getText().toString().isEmpty() && Patterns.PHONE.matcher(phone.getText().toString()).matches()){
             phoneValidate = true;
             t_phone.setError(null);
         }else{
             phoneValidate = false;
-            t_phone.setError("Enter a valid phone number");
+            t_phone.setError("*Enter a valid phone number");
         }
-        if(!passwd.getText().toString().isEmpty()){
+
+        if(!passwd.getText().toString().isEmpty() && passwd.getText().toString().length() >= 6){
             pwdValidate = true;
             t_passwd.setError(null);
         }else{
             pwdValidate = false;
-            t_passwd.setError("Password cannot be empty");
+            t_passwd.setError("*Password must be 6 characters or more");
         }
+
         if(pin.getValue().length() == 6){
             pinValidate = true;
         }else{
             pinValidate = false;
             Toast.makeText(RegisterActivity.this, "Enter a 6 digit pin", Toast.LENGTH_SHORT).show();
         }
+
         if(checkBox.isChecked()){
             checkValidate = true;
         }else{
             checkValidate = false;
             Toast.makeText(RegisterActivity.this, "Agree to Terms and Conditions", Toast.LENGTH_SHORT).show();
         }
+
         return fullnameValidate && emailValidate && phoneValidate && pwdValidate && pinValidate && checkValidate;
     }
 
