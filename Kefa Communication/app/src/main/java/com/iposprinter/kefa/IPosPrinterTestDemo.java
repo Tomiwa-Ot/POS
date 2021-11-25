@@ -515,20 +515,21 @@ public class IPosPrinterTestDemo extends Activity implements OnClickListener {
         if (ButtonDelayUtils.isFastDoubleClick()) {
             return;
         }
-        switch (v.getId()) {
-            //打印随机黑点
+       try{
+           switch (v.getId()) {
+               //打印随机黑点
             /*
             case R.id.b_length:
                 if (getPrinterStatus() == PRINTER_NORMAL)
                     printRandomDot(500);
                 break;
              */
-            //打印长黑块
-            case R.id.b_block:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printBlackBlock(500);
-                break;
-            //并发多线程混乱打印测试
+               //打印长黑块
+               case R.id.b_block:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       printBlackBlock(500);
+                   break;
+               //并发多线程混乱打印测试
             /*
             case R.id.b_testall:
                 if (getPrinterStatus() == PRINTER_NORMAL)
@@ -538,27 +539,27 @@ public class IPosPrinterTestDemo extends Activity implements OnClickListener {
                 }
                 break;
               */
-            //饿了么外卖
-            case R.id.b_erlmo:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printErlmoBill();
-                break;
-            //口碑外卖
-            case R.id.b_koubei:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printKoubeiBill();
-                break;
-            //美团小票
-            case R.id.b_meituan:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printMeiTuanBill();
-                break;
-            //百度小票
-            case R.id.b_baidu:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printBaiduBill();
-                break;
-            //查询开机以来打印长度
+               //饿了么外卖
+               case R.id.b_erlmo:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       printErlmoBill();
+                   break;
+               //口碑外卖
+               case R.id.b_koubei:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       printKoubeiBill();
+                   break;
+               //美团小票
+               case R.id.b_meituan:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       printMeiTuanBill();
+                   break;
+               //百度小票
+               case R.id.b_baidu:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       printBaiduBill();
+                   break;
+               //查询开机以来打印长度
             /*
             case R.id.b_query:
                 if (getPrinterStatus() == PRINTER_NORMAL)
@@ -571,71 +572,71 @@ public class IPosPrinterTestDemo extends Activity implements OnClickListener {
                     printSelf();
                 break;
             */
-            //打印多个空白行
-            case R.id.b_lines:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printLineWrap(3, 24);
-                break;
-            //打印机初始化
+               //打印多个空白行
+               case R.id.b_lines:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       printLineWrap(3, 24);
+                   break;
+               //打印机初始化
             /*
             case R.id.b_init:
                 if (getPrinterStatus() == PRINTER_NORMAL)
                      printerInit();
                 break;
               */
-            //打印文字
-            case R.id.b_text:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printText();
-                break;
-            //打印表格
-            case R.id.b_table:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printTable();
-                break;
-            //打印图片
-            case R.id.b_pic:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printBitmap();
-                break;
-            //打印一维码
-            case R.id.b_barcode:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printBarcode();
-                break;
-            //打印二维码
-            case R.id.b_qcode:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    printQRCode();
-                break;
-            //综合测试
-            case R.id.b_test:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    fullTest();
-                break;
-            //用于演示模式
-            case R.id.b_demo:
-                if (getPrinterStatus() == PRINTER_NORMAL) {
-                    loopPrintFlag = DEMO_LOOP_PRINT;
-                    demoLoopPrint();
-                }
-                break;
-            //退出应用
-            case R.id.b_exit:
-                loopPrintFlag = DEFAULT_LOOP_PRINT;
-                finish();
-                break;
-            //十六进制输入
+               //打印文字
+               case R.id.b_text:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       printText();
+                   break;
+               //打印表格
+               case R.id.b_table:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       printTable();
+                   break;
+               //打印图片
+               case R.id.b_pic:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       printBitmap();
+                   break;
+               //打印一维码
+               case R.id.b_barcode:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       printBarcode();
+                   break;
+               //打印二维码
+               case R.id.b_qcode:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       printQRCode();
+                   break;
+               //综合测试
+               case R.id.b_test:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       fullTest();
+                   break;
+               //用于演示模式
+               case R.id.b_demo:
+                   if (getPrinterStatus() == PRINTER_NORMAL) {
+                       loopPrintFlag = DEMO_LOOP_PRINT;
+                       demoLoopPrint();
+                   }
+                   break;
+               //退出应用
+               case R.id.b_exit:
+                   loopPrintFlag = DEFAULT_LOOP_PRINT;
+                   finish();
+                   break;
+               //十六进制输入
             /*
             case R.id.b_bytes:
                 if (getPrinterStatus() == PRINTER_NORMAL)
                     inputBytes(1);
                 break;
                 */
-            case R.id.b_continu:
-                if (getPrinterStatus() == PRINTER_NORMAL)
-                    continuPrint();
-                break;
+               case R.id.b_continu:
+                   if (getPrinterStatus() == PRINTER_NORMAL)
+                       continuPrint();
+                   break;
             /*
             case R.id.b_error:
                 if (getPrinterStatus() == PRINTER_NORMAL)
@@ -660,9 +661,12 @@ public class IPosPrinterTestDemo extends Activity implements OnClickListener {
                     printerInit();
                 break;
             */
-            default:
-                break;
-        }
+               default:
+                   break;
+           }
+       } catch (Exception exception){
+           Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+       }
     }
 
     /**

@@ -446,8 +446,12 @@ public class BuyActivity extends AppCompatActivity {
 
 
     public void onClick(View v){
-        if (getPrinterStatus() == PRINTER_NORMAL)
-            printReceipt();
+        try{
+            if (getPrinterStatus() == PRINTER_NORMAL)
+                printReceipt();
+        } catch (Exception exception){
+            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
