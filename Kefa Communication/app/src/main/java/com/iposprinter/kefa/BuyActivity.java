@@ -16,12 +16,15 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -240,6 +243,14 @@ public class BuyActivity extends AppCompatActivity {
                 Log.i(TAG, "result:" + value + "\n");
             }
         };
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
     }
 
     private ServiceConnection connectService = new ServiceConnection() {
