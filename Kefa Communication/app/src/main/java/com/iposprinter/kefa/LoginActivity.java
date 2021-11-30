@@ -51,13 +51,13 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean("isLoggedIn", true);
                     editor.putString("fullname", object.getString("fullname"));
                     editor.putString("email", email.getText().toString());
-                    // editor.putString("phone", object.getString("phone"));
+                    editor.putString("phone", object.getString("phone"));
                     editor.putString("token", object.getString("token"));
                     editor.apply();
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     intent.putExtra("fullname", object.getString("fullname"));
                     intent.putExtra("email", email.getText().toString());
-                    // intent.putExtra("phone", object.getString("phone"));
+                    intent.putExtra("phone", object.getString("phone"));
                     intent.putExtra("token", object.getString("token"));
                     startActivity(intent);
                     LoginActivity.this.finish();
@@ -158,11 +158,11 @@ public class LoginActivity extends AppCompatActivity {
         if(isLoggedIn){
             String fullname = loginState.getString("fullname", null);
             String email = loginState.getString("email", null);
-            // String phone = loginState.getString("phone", null);
+            String phone = loginState.getString("phone", null);
             String token = loginState.getString("token", null);
             intent.putExtra("fullname", fullname);
             intent.putExtra("email", email);
-            // intent.putExtra("phone", phone);
+            intent.putExtra("phone", phone);
             intent.putExtra("token", token);
             startActivity(intent);
             LoginActivity.this.finish();
