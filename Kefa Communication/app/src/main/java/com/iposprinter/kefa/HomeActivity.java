@@ -21,9 +21,9 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         TextView name = (TextView) findViewById(R.id.txt_name);
         String fullname = getIntent().getStringExtra("fullname");
-        // String email = getIntent().getStringExtra("email");
+         String email = getIntent().getStringExtra("email");
         // String phone = getIntent().getStringExtra("phone");
-        // String token = getIntent().getStringExtra("token");
+         String token = getIntent().getStringExtra("token");
         name.setText(fullname);
         LinearLayout testPrinter = (LinearLayout) findViewById(R.id.test_printer);
         LinearLayout logoutLL = (LinearLayout) findViewById(R.id.logout_ll);
@@ -31,6 +31,8 @@ public class HomeActivity extends AppCompatActivity {
         LinearLayout buyPage = (LinearLayout) findViewById(R.id.buy_screen);
         buyPage.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, BuyActivity.class);
+            intent.putExtra("email", email);
+            intent.putExtra("token", token);
             startActivity(intent);
         });
         historyLL.setOnClickListener(v -> {
