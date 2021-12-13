@@ -36,9 +36,11 @@ import butterknife.OnTextChanged;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.goodiebag.pinview.Pinview;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -46,6 +48,7 @@ import com.iposprinter.iposprinterservice.IPosPrinterCallback;
 import com.iposprinter.iposprinterservice.IPosPrinterService;
 import com.iposprinter.kefa.Utils.HandlerUtils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,6 +63,10 @@ public class BuyActivity extends AppCompatActivity {
     private EditText name, cardNumber, cardDate, cardCVV, amountNaira, amountBTC, walletAddress;
     private Pinview pin;
     private ProgressBar progressBar;
+    private ResponseListener listener;
+
+    private static final String VERIFY_PIN_URL = "https://tomiwa.com.ng/kefa/verify_pin";
+    private String token, email;
 
     private static final int REQUEST_CAMERA_PERMISSION = 201;
 
@@ -228,8 +235,23 @@ public class BuyActivity extends AppCompatActivity {
         walletAddress = (EditText) findViewById(R.id.wallet_address);
         pin = (Pinview) findViewById(R.id.pinview);
         progressBar = (ProgressBar) findViewById(R.id.buy_progress);
+        token = getIntent().getStringExtra("token");
+        email = getIntent().getStringExtra("email");
         closeKeyboard();
         ButterKnife.bind(this);
+        listener = new ResponseListener() {
+            @Override
+            public void gotResponse(JSONObject object) {
+                progressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void historyResponse(JSONArray obj) {
+
+            }
+        };
         handler = new HandlerUtils.MyHandler(iHandlerIntent);
         callback = new IPosPrinterCallback.Stub() {
 
@@ -447,8 +469,9 @@ public class BuyActivity extends AppCompatActivity {
 
     public void onClick(View v){
         try{
-            if (getPrinterStatus() == PRINTER_NORMAL)
-                printReceipt();
+            verifyPin();
+//            if (getPrinterStatus() == PRINTER_NORMAL)
+//                printReceipt();
         } catch (Exception exception){
             Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -565,6 +588,51 @@ public class BuyActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         closeKeyboard();
+    }
+
+    private void verifyPin(){
+        HttpsTrustManager.allowAllSSL();
+        progressBar.setVisibility(View.VISIBLE);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(Request.Method.POST, VERIFY_PIN_URL,
+                response -> {
+                    try{
+                        JSONObject obj = new JSONObject(response);
+                        if(obj.getString("status").equals("valid")){
+                            listener.gotResponse(obj);
+                        }else if(obj.getString("status").equals("invalid")){
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(BuyActivity.this, "Incorrect pin", Toast.LENGTH_SHORT).show();
+                        } else{
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(BuyActivity.this, "Oops something went wrong", Toast.LENGTH_LONG).show();
+                        }
+                    } catch(JSONException e){
+                        progressBar.setVisibility(View.GONE);
+                        e.printStackTrace();
+                    }
+                }, error -> {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(BuyActivity.this, "Oops something went wrong", Toast.LENGTH_SHORT).show();
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", email);
+                params.put("pin", pin.getValue());
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<>();
+                params.put("User-Agent", "KEFA POS");
+                params.put("Authorization", token);
+                return params;
+            }
+        };
+        requestQueue.add(request);
     }
 
     public void closeKeyboard(){
