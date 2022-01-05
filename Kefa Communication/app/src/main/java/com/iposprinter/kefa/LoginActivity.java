@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.apply();
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                     intent.putExtra("fullname", object.getString("fullname"));
+
                     intent.putExtra("email", email.getText().toString());
                     intent.putExtra("phone", object.getString("phone"));
                     intent.putExtra("token", object.getString("token"));
