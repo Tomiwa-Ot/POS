@@ -71,6 +71,11 @@ public class LoginActivity extends AppCompatActivity {
             public void historyResponse(JSONArray obj) {
 
             }
+
+            @Override
+            public void printReceipt(JSONObject object) {
+
+            }
         };
         email = (EditText) findViewById(R.id.edt_email);
         passwd = (EditText) findViewById(R.id.edt_passwd);

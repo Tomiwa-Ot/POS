@@ -45,7 +45,7 @@ public class HistoryActivity extends AppCompatActivity {
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
         listView = (ListView) findViewById(R.id.history_list_view);
         mQueue = Volley.newRequestQueue(this);
-        fetchJsonResponse();
+        //fetchJsonResponse();
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
 
@@ -59,6 +59,11 @@ public class HistoryActivity extends AppCompatActivity {
 
             @Override
             public void historyResponse(JSONArray obj) {
+
+            }
+
+            @Override
+            public void printReceipt(JSONObject object) {
 
             }
         };

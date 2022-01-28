@@ -12,6 +12,7 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Message;
@@ -19,6 +20,7 @@ import android.os.RemoteException;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.app.ActivityCompat;
 
 import android.os.Bundle;
@@ -31,8 +33,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import butterknife.ButterKnife;
-import butterknife.OnTextChanged;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -52,6 +52,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -60,30 +62,18 @@ import static com.iposprinter.kefa.MemInfo.bitmapRecycle;
 
 public class BuyActivity extends AppCompatActivity {
 
-    private EditText name, cardNumber, cardDate, cardCVV, amountNaira, amountBTC, walletAddress;
+    private EditText amountNaira, walletAddress;
     private Pinview pin;
     private ProgressBar progressBar;
     private ResponseListener listener;
 
     private static final String VERIFY_PIN_URL = "https://tomiwa.com.ng/kefa/verify_pin";
+    private static final String VERIFY_AMOUNT_URL = "https://kefa-communication.com/api/fetch_rates";
+    private static final String BUY_URL = "https://kefa-communication.com/api/buy";
+    private static final String FETCH_TRXN_URL = "https://kefa-communication.com/api/fetch_txn";
     private String token, email;
 
     private static final int REQUEST_CAMERA_PERMISSION = 201;
-
-
-    private static final int CARD_NUMBER_TOTAL_SYMBOLS = 19; // size of pattern 0000-0000-0000-0000
-    private static final int CARD_NUMBER_TOTAL_DIGITS = 16; // max numbers of digits in pattern: 0000 x 4
-    private static final int CARD_NUMBER_DIVIDER_MODULO = 5; // means divider position is every 5th symbol beginning with 1
-    private static final int CARD_NUMBER_DIVIDER_POSITION = CARD_NUMBER_DIVIDER_MODULO - 1; // means divider position is every 4th symbol beginning with 0
-    private static final char CARD_NUMBER_DIVIDER = '-';
-
-    private static final int CARD_DATE_TOTAL_SYMBOLS = 5; // size of pattern MM/YY
-    private static final int CARD_DATE_TOTAL_DIGITS = 4; // max numbers of digits in pattern: MM + YY
-    private static final int CARD_DATE_DIVIDER_MODULO = 3; // means divider position is every 3rd symbol beginning with 1
-    private static final int CARD_DATE_DIVIDER_POSITION = CARD_DATE_DIVIDER_MODULO - 1; // means divider position is every 2nd symbol beginning with 0
-    private static final char CARD_DATE_DIVIDER = '/';
-
-    private static final int CARD_CVC_TOTAL_SYMBOLS = 3;
 
     private Random random = new Random();
 
@@ -138,72 +128,47 @@ public class BuyActivity extends AppCompatActivity {
     private HandlerUtils.MyHandler handler;
 
 
-    @OnTextChanged(value = R.id.cardNumberEditText, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    protected void onCardNumberTextChanged(Editable s) {
-        if (!isInputCorrect(s, CARD_NUMBER_TOTAL_SYMBOLS, CARD_NUMBER_DIVIDER_MODULO, CARD_NUMBER_DIVIDER)) {
-            s.replace(0, s.length(), concatString(getDigitArray(s, CARD_NUMBER_TOTAL_DIGITS), CARD_NUMBER_DIVIDER_POSITION, CARD_NUMBER_DIVIDER));
-        }
-    }
-
-    @OnTextChanged(value = R.id.cardDateEditText, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    protected void onCardDateTextChanged(Editable s) {
-        if (!isInputCorrect(s, CARD_DATE_TOTAL_SYMBOLS, CARD_DATE_DIVIDER_MODULO, CARD_DATE_DIVIDER)) {
-            s.replace(0, s.length(), concatString(getDigitArray(s, CARD_DATE_TOTAL_DIGITS), CARD_DATE_DIVIDER_POSITION, CARD_DATE_DIVIDER));
-        }
-    }
-
-    @OnTextChanged(value = R.id.cardCVCEditText, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    protected void onCardCVCTextChanged(Editable s) {
-        if (s.length() > CARD_CVC_TOTAL_SYMBOLS) {
-            s.delete(CARD_CVC_TOTAL_SYMBOLS, s.length());
-        }
-    }
-
-    private boolean isInputCorrect(Editable s, int size, int dividerPosition, char divider) {
-        boolean isCorrect = s.length() <= size;
-        for (int i = 0; i < s.length(); i++) {
-            if (i > 0 && (i + 1) % dividerPosition == 0) {
-                isCorrect &= divider == s.charAt(i);
-            } else {
-                isCorrect &= Character.isDigit(s.charAt(i));
-            }
-        }
-        return isCorrect;
-    }
-
-    private String concatString(char[] digits, int dividerPosition, char divider) {
-        final StringBuilder formatted = new StringBuilder();
-
-        for (int i = 0; i < digits.length; i++) {
-            if (digits[i] != 0) {
-                formatted.append(digits[i]);
-                if ((i > 0) && (i < (digits.length - 1)) && (((i + 1) % dividerPosition) == 0)) {
-                    formatted.append(divider);
-                }
-            }
-        }
-
-        return formatted.toString();
-    }
-
-    private char[] getDigitArray(final Editable s, final int size) {
-        char[] digits = new char[size];
-        int index = 0;
-        for (int i = 0; i < s.length() && index < size; i++) {
-            char current = s.charAt(i);
-            if (Character.isDigit(current)) {
-                digits[index] = current;
-                index++;
-            }
-        }
-        return digits;
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1){
             if (resultCode == RESULT_OK) {
-                walletAddress.setText(data.getStringExtra("address"));
+                HttpsTrustManager.allowAllSSL();
+                RequestQueue requestQueue = Volley.newRequestQueue(this);
+                StringRequest request = new StringRequest(Request.Method.POST, FETCH_TRXN_URL,
+                        response -> {
+                            try{
+                                JSONObject obj = new JSONObject(response);
+                                if(obj.getString("status").equals("valid")){
+                                    listener.printReceipt(obj);
+                                } else {
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(BuyActivity.this, "Oops something went wrong", Toast.LENGTH_LONG).show();
+                                }
+                            } catch(JSONException e){
+                                progressBar.setVisibility(View.GONE);
+                                e.printStackTrace();
+                            }
+                        }, error -> {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(BuyActivity.this, "Oops something went wrong", Toast.LENGTH_SHORT).show();
+                }
+                ){
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("merchant_transaction_id", data.getStringExtra("merchant_transaction_id"));
+                        return params;
+                    }
+
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("User-Agent", "KEFA POS");
+                        params.put("Authorization", token);
+                        return params;
+                    }
+                };
+                requestQueue.add(request);
             }
         }else{
             super.onActivityResult(requestCode, resultCode, data);
@@ -227,10 +192,6 @@ public class BuyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTitle("Buy");
         setContentView(R.layout.activity_buy);
-        name = (EditText) findViewById(R.id.customerName);
-        cardNumber = (EditText) findViewById(R.id.cardNumberEditText);
-        cardDate = (EditText) findViewById(R.id.cardDateEditText);
-        cardCVV = (EditText) findViewById(R.id.cardCVCEditText);
         amountNaira = (EditText) findViewById(R.id.amount_naira);
         walletAddress = (EditText) findViewById(R.id.wallet_address);
         pin = (Pinview) findViewById(R.id.pinview);
@@ -238,18 +199,33 @@ public class BuyActivity extends AppCompatActivity {
         token = getIntent().getStringExtra("token");
         email = getIntent().getStringExtra("email");
         closeKeyboard();
-        ButterKnife.bind(this);
         listener = new ResponseListener() {
             @Override
             public void gotResponse(JSONObject object) {
-                progressBar.setVisibility(View.GONE);
-                Intent intent = new Intent(getApplicationContext(), WebViewActivity.class);
-                startActivity(intent);
+                try {
+                    progressBar.setVisibility(View.GONE);
+                    String secret = object.getString("secret");
+                    String signature = generateSignature(walletAddress.getText().toString(), secret);
+                    String url = BUY_URL + "?address=" + walletAddress.getText().toString() + "&fiat_amount=" + amountNaira.getText().toString() + "&signature=" + signature;
+                    CustomTabsIntent.Builder customIntent = new CustomTabsIntent.Builder();
+                    openCustomTab(BuyActivity.this, customIntent.build(), Uri.parse(url));
+                } catch (JSONException | NoSuchAlgorithmException jsonException) {
+                    jsonException.printStackTrace();
+                }
             }
 
             @Override
             public void historyResponse(JSONArray obj) {
 
+            }
+
+            @Override
+            public void printReceipt(JSONObject object) {
+//                try {
+//                    progressBar.setVisibility(View.GONE);
+//                } catch (JSONException jsonException) {
+//                    jsonException.printStackTrace();
+//                }
             }
         };
         handler = new HandlerUtils.MyHandler(iHandlerIntent);
@@ -467,14 +443,14 @@ public class BuyActivity extends AppCompatActivity {
 
 
 
-    public void onClick(View v){
-        try{
-            verifyPin();
-//            if (getPrinterStatus() == PRINTER_NORMAL)
-//                printReceipt();
-        } catch (Exception exception){
-            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+    public void onClick(View v) throws NoSuchAlgorithmException {
+        verifyPin();
+    }
+
+    public void openCustomTab(Activity activity, CustomTabsIntent intent, Uri uri) {
+        String chromePackage = "com.android.chrome";
+        intent.intent.setPackage(chromePackage);
+        intent.launchUrl(activity, uri);
     }
 
     @Override
@@ -590,6 +566,52 @@ public class BuyActivity extends AppCompatActivity {
         closeKeyboard();
     }
 
+    private void verifyAmount() {
+        HttpsTrustManager.allowAllSSL();
+        progressBar.setVisibility(View.VISIBLE);
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(Request.Method.POST, VERIFY_AMOUNT_URL,
+                response -> {
+                    try{
+                        JSONObject obj = new JSONObject(response);
+                        if(obj.getString("status").equals("ok")){
+                            verifyPin();
+                        }else if(obj.getString("status").equals("less")){
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(BuyActivity.this, "Incorrect pin", Toast.LENGTH_SHORT).show();
+                        } else if(obj.getString("status").equals("more")){
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(BuyActivity.this, "Oops something went wrong", Toast.LENGTH_LONG).show();
+                        }
+                    } catch(JSONException e){
+                        progressBar.setVisibility(View.GONE);
+                        e.printStackTrace();
+                    }
+                }, error -> {
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(BuyActivity.this, "Oops something went wrong", Toast.LENGTH_SHORT).show();
+        }
+        ){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", email);
+                params.put("pin", pin.getValue());
+                params.put("fiatAmount", amountNaira.getText().toString());
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<>();
+                params.put("User-Agent", "KEFA POS");
+                params.put("Authorization", token);
+                return params;
+            }
+        };
+        requestQueue.add(request);
+    }
+
     private void verifyPin(){
         HttpsTrustManager.allowAllSSL();
         progressBar.setVisibility(View.VISIBLE);
@@ -613,7 +635,7 @@ public class BuyActivity extends AppCompatActivity {
                     }
                 }, error -> {
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(BuyActivity.this, "Oops something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BuyActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
                 }
         ){
             @Override
@@ -641,6 +663,16 @@ public class BuyActivity extends AppCompatActivity {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    private String generateSignature(String address, String secret) throws NoSuchAlgorithmException {
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
+        byte[] digest = messageDigest.digest((address + secret).getBytes());
+        StringBuilder builder = new StringBuilder();
+        for(byte d : digest) {
+            builder.append(Integer.toString((d & 0xff) + 0x100, 16).substring(1));
+        }
+        return builder.toString();
     }
 
 

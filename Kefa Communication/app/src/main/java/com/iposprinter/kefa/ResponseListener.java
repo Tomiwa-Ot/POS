@@ -9,4 +9,6 @@ public interface ResponseListener {
 
     void historyResponse(JSONArray obj);
 
+    void printReceipt(JSONObject object);
+
 }

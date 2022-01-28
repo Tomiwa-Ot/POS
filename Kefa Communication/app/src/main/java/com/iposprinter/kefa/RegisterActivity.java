@@ -76,6 +76,11 @@ public class RegisterActivity extends AppCompatActivity {
             public void historyResponse(JSONArray obj) {
 
             }
+
+            @Override
+            public void printReceipt(JSONObject object) {
+
+            }
         };
 
         fullname = (EditText) findViewById(R.id.edt_fullname);
