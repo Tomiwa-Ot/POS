@@ -42,6 +42,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.goodiebag.pinview.Pinview;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.iposprinter.iposprinterservice.IPosPrinterCallback;
@@ -444,7 +445,9 @@ public class BuyActivity extends AppCompatActivity {
 
 
     public void onClick(View v) throws NoSuchAlgorithmException {
-        verifyPin();
+        if(verifyDetails()) {
+            verifyPin();
+        }
     }
 
     public void openCustomTab(Activity activity, CustomTabsIntent intent, Uri uri) {
@@ -673,6 +676,29 @@ public class BuyActivity extends AppCompatActivity {
             builder.append(Integer.toString((d & 0xff) + 0x100, 16).substring(1));
         }
         return builder.toString();
+    }
+
+    public boolean verifyDetails() {
+        boolean amountValidate, addressValidate;
+        TextInputLayout t_amount = (TextInputLayout) findViewById(R.id.amount_input_layout);
+        TextInputLayout t_address = (TextInputLayout) findViewById(R.id.wallet_input_layout);
+
+        if(!amountNaira.getText().toString().isEmpty()) {
+            amountValidate = true;
+            t_amount.setError(null);
+        } else {
+            amountValidate = false;
+            t_amount.setError("*Enter a valid amount");
+        }
+
+        if(!walletAddress.getText().toString().isEmpty()) {
+            addressValidate = true;
+            t_address.setError(null);
+        } else {
+            addressValidate = false;
+            t_address.setError("*Enter a valid address");
+        }
+        return amountValidate && addressValidate;
     }
 
 

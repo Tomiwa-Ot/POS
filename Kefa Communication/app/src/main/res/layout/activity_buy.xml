@@ -19,33 +19,43 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-
-        <EditText
-            android:id="@+id/amount_naira"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/amount_input_layout"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="-0.25dp"
-            android:background="@drawable/bg_buy_edittext"
-            android:hint="@string/amount"
-            android:inputType="phone"
-            android:padding="16dp"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            tools:ignore="LabelFor,NegativeMargin" />
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/wallet_address"
-                android:layout_width="0dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/amount_naira"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:layout_marginBottom="-0.25dp"
-                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_buy_edittext"
+                android:hint="@string/amount"
+                android:inputType="phone"
+                android:padding="16dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                tools:ignore="LabelFor,NegativeMargin" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="horizontal">-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/wallet_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/wallet_address"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/bg_buy_edittext"
                 android:hint="@string/walletAddress"
@@ -55,21 +65,23 @@
                 android:textSize="14sp"
                 tools:ignore="LabelFor,NegativeMargin" />
 
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageButton
-                android:id="@+id/scan_qr"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="-0.25dp"
-                android:background="@drawable/bg_scan_btn"
-                android:onClick="scanQRCode"
-                android:padding="5dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/icon_qr_code" />
 
-        </LinearLayout>
+<!--            <ImageButton-->
+<!--                android:id="@+id/scan_qr"-->
+<!--                android:layout_width="45dp"-->
+<!--                android:layout_height="45dp"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginBottom="-0.25dp"-->
+<!--                android:background="@drawable/bg_scan_btn"-->
+<!--                android:onClick="scanQRCode"-->
+<!--                android:padding="5dp"-->
+<!--                android:scaleType="fitCenter"-->
+<!--                android:src="@drawable/icon_qr_code" />-->
+
+<!--        </LinearLayout>-->
 
         <TextView
             android:layout_marginTop="10dp"
