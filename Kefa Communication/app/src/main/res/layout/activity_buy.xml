@@ -56,7 +56,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:layout_marginRight="10dp"
                 android:background="@drawable/bg_buy_edittext"
                 android:hint="@string/walletAddress"
                 android:inputType="text"
