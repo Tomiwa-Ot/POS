@@ -638,7 +638,7 @@ public class BuyActivity extends AppCompatActivity {
                     }
                 }, error -> {
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(BuyActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(BuyActivity.this, "Check internet connection", Toast.LENGTH_LONG).show();
                 }
         ){
             @Override
