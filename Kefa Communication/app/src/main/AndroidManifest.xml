@@ -26,10 +26,10 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ViewHistoryActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".WebViewActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
